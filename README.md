@@ -29,6 +29,8 @@ The program will then print your "character sheet", with in order:
   - the description of the ability;
   - the pieces of inventory used by your character in conjunction with this ability.
 
+---
+
 ## How it works
 The whole generation process is based on the sole information known about the character: their name.
 I will add some more details in the future about the exact process, but it mostly works like this:
