@@ -1,4 +1,4 @@
-from utils import str_norm
+from .utils import str_norm
 
 
 # Returns a copy of s where all instances
