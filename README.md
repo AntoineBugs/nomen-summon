@@ -2,7 +2,7 @@
 
 Nomen Summon is a small Python program that allows you to generate the specs of a fantasy-like character.
 
-All the text displayed is written in French as it is my mother-tongue, but I might work on an English translation later.
+All the text displayed is written in French as it is my native language, but I might work on an English translation later.
 
 *This is just a small project I did to practice my base Python coding, so maybe you will not find it up to your expectations of optimized programming and well-written code. However I'm open to suggestions and willing to make this the best it can be!*
 
