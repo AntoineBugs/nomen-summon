@@ -1,3 +1,4 @@
+import os
 import bin.name2species as nts
 import bin.name2clan as ntc
 from bin.utils import str_norm, cut_name, label_cuts, group_cuts
@@ -28,9 +29,11 @@ class Character:
     # computes the aptitude levels
     def extract_apts(self):
 
-        with open('bin/items.pickle', 'rb') as file:
+        file_path = os.path.join("bin","items.pickle")
+        with open(file_path, 'rb') as file:
             items = pickle.load(file)
-        with open('bin/apts.pickle', 'rb') as file:
+        file_path = os.path.join("bin","apts.pickle")
+        with open(file_path, 'rb') as file:
             apts = pickle.load(file)
 
         advantages = self.clan.gene_adv
