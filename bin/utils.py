@@ -117,4 +117,4 @@ def group_cuts(ncut, lcut):
         for x in d:
             upd_dict(d, x, v, 0, all=True)
 
-    return d
+    return d, v

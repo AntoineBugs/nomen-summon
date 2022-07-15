@@ -1,10 +1,11 @@
 from math import floor
+from re import A
 
 from bin.name2clan import GeneticProfile
 from bin.name2species import SpeciesProfile
 from bin.utils import cut_name, group_cuts, label_cuts
-from bin.data import aptitudes as apts
-from bin.data import items_dict as items
+from bin.data_access import aptitudes as apts
+from bin.data_access import items_dict as items
 
 
 class Character:
@@ -15,25 +16,23 @@ class Character:
         self.species = SpeciesProfile(self.firstN, self.familyN)
         self.clan = GeneticProfile(self.familyN)
         self.advantage, self.nobility, self.purity = self.clan.get_components()
-        self.tot_size, self.pow_size, self.groups = self.compute_apts()
+        self.compute_apts()
         self.skills, self.level = self.extract_apts()
 
     # computes the aptitudes, their levels and inventories
     def compute_apts(self):
         name_cut = cut_name(self.firstN)
         sizes = [len(cut) for cut in name_cut]
-        tot_size = sum(sizes)
+        self.tot_size = sum(sizes)
         label_cut = label_cuts(name_cut)
         sizer = lambda size, label: size if label < 2 else 0
-        pow_size = sum([sizer(x, y) for (x, y) in zip(sizes, label_cut)])
-        groups = group_cuts(name_cut, label_cut)
-        return tot_size, pow_size, groups
+        self.pow_size = sum([sizer(x, y) for (x, y) in zip(sizes, label_cut)])
+        self.groups, global_inv = group_cuts(name_cut, label_cut)
+        self.global_inv = {x: {} for x in global_inv}
 
     # computes the aptitude levels
     def extract_apts(self):
-
         tot_skills_lvl = tot_added_values = 0
-
         skillset = []
 
         for group, assoc in self.groups.items():
@@ -72,6 +71,8 @@ class Character:
                     size = len(it)
                     spec['level'] = floor(100 * coeff * size / self.pow_size)
                 inventory.append(spec)
+                if glob:
+                    self.global_inv[it] = spec
 
             skill['items'] = inventory
 

@@ -1,3 +1,13 @@
+from bin.data_access import find_mastery_lvl
+
+
+def item2str(item):
+    s = f"\n\t· {item['name'].capitalize()}"
+    if item['type'] != "inclassable":
+        s += f" niveau {item['level']}/100"
+    return s
+
+
 # Builds a string for an aptitude 
 def skill2str(skill):
     name = skill['name']
@@ -5,18 +15,13 @@ def skill2str(skill):
     lvl = skill['level']
     its = skill['items']
 
-    s = "· {} niveau {}\n".format(name.capitalize(), lvl)
+    s = f"· {name.capitalize()} niveau {lvl}/100 ({find_mastery_lvl(lvl)})\n"
     s += '\t' + desc + '\n'
     if len(its) > 0:
         s += "\tInventaire :"
         for it in its:
-            if it['type'] != "inclassable":
-                s += "\n\t· {} niveau {}".format(it['name'].capitalize(), it['level'])
-            else:
-                s += "\n\t· {}".format(it['name'].capitalize())
-            if it['all']:
-                s += " (inventaire global)"
-
+            if not it['all']:
+                s += item2str(it)
     return s
 
 
@@ -54,7 +59,7 @@ def print_char(chara, show=True):
 
     sk = chara.skills
 
-    header = f"*** {fir} {fam} - {sp_n.capitalize()} niveau {lvl} ***"
+    header = f"*** {fir} {fam} - {sp_n.capitalize()} niveau {lvl} ***\n"
     body_spec = f"Description de l'espèce :\n\t{sp.desc}"
 
     l = []
@@ -67,19 +72,24 @@ def print_char(chara, show=True):
     percent = lambda x: (26 - x) / 26
     l.append(f"\tNoblesse de lignée : {cl_n} / {percent(cl_n):.0%}")
     l.append(f"\tPureté de lignée : {cl_p} / {percent(cl_p):.0%}")
-    s = "~ Les indices de noblesse et de pureté sont situés entre 1 (pureté"
-    s += " ou noblesse maximale) et 26 (pureté ou noblesse minimale) ~"
-    l.append(s)
+    # s = "~ Les indices de noblesse et de pureté sont situés entre 1 (pureté"
+    # s += " ou noblesse maximale) et 26 (pureté ou noblesse minimale) ~"
+    # l.append(s)
     body_clan = "\n".join(l) + "\n"
 
     body_skills = "Aptitudes et pouvoirs :\n"
     for a in sk:
         body_skills += skill2str(a) + '\n'
 
-    s = '\n'.join([header, body_spec, body_clan, body_skills])
-    # len_max = max(len(l) for l in s.splitlines())
-    # bar = len_max*'-' + '\n'
-    # print(bar + s + bar)
+    body_global_inv = ''
+    global_inv = chara.global_inv
+    if len(global_inv.keys()) > 0:
+        body_global_inv = "Inventaire global :"
+        for it in global_inv.values():
+            body_global_inv += item2str(it)
+
+    s = '\n'.join([header, body_spec, body_clan, body_skills, body_global_inv])
+    
     if show:
         print(s)
     return s

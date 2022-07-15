@@ -1,5 +1,6 @@
 import pickle
 import os
+import sys
 
 
 # Species
@@ -96,24 +97,35 @@ power_dict = {l: {'name': n, 'desc': d} for (l, n, d) in power_zip}
 
 aptitudes = {'classes': class_dict, 'powers': power_dict}
 
+# Mastery levels
+apt_mastery = {
+    'base': range(50),
+    'avancé': range(50, 100),
+    'maître': range(100, 200),
+    'élite': range(200, sys.maxsize)
+}
+
+def find_mastery_lvl(lvl):
+    mastery = ''
+    for k, v in apt_mastery.items():
+        if lvl in v:
+            mastery = k
+            break
+    return mastery
 
 #   Pickle dumping functions
 # You can use this script and its content to generate the pickle files again
 
-def species():
-    
+def species_dump():
     with open('species.pickle', 'wb') as species_file:
         pickle.dump(species_dict, species_file)
 
 
-def items():
-
+def items_dump():
     with open('items.pickle', 'wb') as items_file:
         pickle.dump(items_dict, items_file)
 
 
-def apts():
-    
-
+def apts_dump():
     with open('apts.pickle', 'wb') as aptitudes_file:
         pickle.dump(aptitudes, aptitudes_file)
