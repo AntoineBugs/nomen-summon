@@ -5,7 +5,8 @@ from bin.utils import str_norm
 
 # Prompts the first and last names and computes the Character object
 def make_char():
-    err_msg = "Votre entrée ne peut contenir que des lettres (accents permis), des espaces et des traits d'union."
+    err_msg = "Votre entrée ne peut contenir que des lettres (accents permis),"
+    err_msg += " des espaces et des traits d'union."
     
     def get_word(nature):
         w2def = True

@@ -76,28 +76,22 @@ def group_cuts(ncut, lcut):
     # and items v
     def upd_dict(dictionary, key, values, o):
         ud = dictionary.get(key, {})
-        occ = ud.get('occ', 0)
-        occ += o
-        ud['occ'] = occ
+        ud['occ'] = ud.get('occ', 0) + o
         its_list = ud.get('its', [])
         its_list += values
         ud['its'] = its_list
         dictionary[key] = ud
 
     l_init = lcut[0]
-    d = {}
-    k = ''
-    v = []
-    new_occ = False
-    hanging = False
+    d, k, v = {}, '', []
+    new_occ = hanging = False
     for cut, label in zip(ncut, lcut):
         if label == 0:
             v.append(cut)
             if l_init > 0:
                 upd_dict(d, k, v, 1 if new_occ else 0)
                 v = []
-                new_occ = False
-                hanging = False
+                new_occ = hanging = False
             else:
                 hanging = True
         else:

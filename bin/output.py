@@ -62,10 +62,11 @@ def print_char(chara, show=True):
     s += ": " if len(advantages_list) <= 0 else "pour " 
     s += genetic_advantages + "."
     l.append(s)
-    l.append(f"\tNoblesse de lignée : {cl_n}")
-    l.append(f"\tPureté de lignée : {cl_p}")
-    s = "~ Les indices de noblesse et de pureté sont situés entre 1 (pureté ou"
-    s += " noblesse maximale) et 26 (pureté ou noblesse minimale) ~"
+    percent = lambda x: (27 - x) / 26
+    l.append(f"\tNoblesse de lignée : {cl_n} / {percent(cl_n):.0%}")
+    l.append(f"\tPureté de lignée : {cl_p} / {percent(cl_p):.0%}")
+    s = "~ Les indices de noblesse et de pureté sont situés entre 1 (pureté"
+    s += " ou noblesse maximale) et 26 (pureté ou noblesse minimale) ~"
     l.append(s)
     body_clan = "\n".join(l) + "\n"
 

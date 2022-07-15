@@ -9,7 +9,7 @@ species_list = ["loup-garou", "ange", "orc", "harpie", "dragonide", "gobelin", "
                 "troll", "kelpie", "sirène", "golem", "minotaure"]
 
 
-filename = os.path.join("nomen-summon", "bin", "species.txt")
+filename = os.path.join("nomen-summon", "data", "species.txt")
 with open(filename, "rt", encoding='utf8') as file:
     species_desc = file.readlines()
     for i, line in enumerate(species_desc):
@@ -68,7 +68,7 @@ class_names = ['mage', 'archer', 'bretteur', 'lutteur', 'acrobate', 'technicien'
                  'chasseur', 'éclaireur', 'pistolier', 'gladiateur', 'assassin', 'forgeron',
                  'artiste martial', 'médecin', 'voleur']
 
-filename = os.path.join("nomen-summon", "bin", "classes.txt")
+filename = os.path.join("nomen-summon", "data", "classes.txt")
 with open(filename, 'rt', encoding='utf8') as file:
     class_desc = file.readlines()
     for i, line in enumerate(class_desc):
@@ -83,7 +83,7 @@ power_names = ["saint", "élémentaliste", "chaman", "métamorphe", "téléporte
                 "marionnettiste", "prophète", "druide", "météomage", "faiseur de golems",
                 "avatar", "invocateur", "vaudou", "caméléon", "doppelganger", "onironaute"]
 
-filename = os.path.join("nomen-summon", "bin", "powers.txt")
+filename = os.path.join("nomen-summon", "data", "powers.txt")
 with open(filename, 'rt', encoding='utf8') as file:
     power_desc = file.readlines()
     for i, line in enumerate(power_desc):

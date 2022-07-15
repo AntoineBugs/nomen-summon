@@ -37,9 +37,7 @@ class Character:
         skillset = []
 
         for group, assoc in self.groups.items():
-            its = assoc['its']
-            occ = assoc['occ']
-
+            its, occ = assoc['its'], assoc['occ']
             skill = {}
 
             if group[-1] != 'n':
@@ -53,25 +51,18 @@ class Character:
             skill['desc'] = apt['desc']
 
             size = occ * len(key)
-            # base level
-            lvl = 100 * size / self.pow_size
-            # items added value
+            lvl = 100 * size / self.pow_size                    # base level
             values_from_its = self.extract_items(its, items)
-            its_sum = sum([it[1] for it in values_from_its])
-            # genetic advantage
-            adv = self.key2adv(key, self.advantage)
-            # advanced level
-            skill['level'] = floor(adv * (its_sum + lvl))
+            its_sum = sum([it[1] for it in values_from_its])    # items added value
+            adv = self.key2adv(key, self.advantage)             # genetic advantage
+            skill['level'] = floor(adv * (its_sum + lvl))       # advanced level
 
             tot_skills_lvl += skill['level']
             tot_added_values += its_sum
 
             inventory = []
             for it, value_it in zip(its, values_from_its):
-                spec = {
-                    'name': value_it[0],
-                    'type': value_it[2]
-                }
+                spec = dict(name=value_it[0], type=value_it[2])
                 if value_it[2] != 'inclassable':
                     if value_it[2] == 'objet':
                         coeff = (53 - self.nobility) / 26
