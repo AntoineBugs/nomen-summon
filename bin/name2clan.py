@@ -1,4 +1,4 @@
-from .utils import str_norm
+from bin.utils import str_norm
 
 
 # Returns a copy of s where all instances
@@ -68,3 +68,7 @@ class GeneticProfile:
             return sum(r) / len(r)
 
         self.purity, self.nobility = ratio(self.heart), ratio(self.mantle)
+
+
+    def get_components(self):
+        return self.gene_adv, self.nobility, self.purity

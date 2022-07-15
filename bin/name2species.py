@@ -1,14 +1,8 @@
 from scipy.special import comb
-import pickle
-from .utils import str_norm
-import os
 
+from bin.data import species_dict as species
 
-# species is an ordered list of tuples,
-# of the form ("species name","species description")
-file_path = os.path.join("bin","species.pickle")
-with open(file_path, 'rb') as file:
-    species = pickle.load(file)
+from bin.utils import str_norm
 
 
 # Computes and return the combinatorial sum for a given name.

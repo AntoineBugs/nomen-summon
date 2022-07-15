@@ -15,27 +15,30 @@ vow = list('aeiouy')
 # separating vowels from consonants (to the exception
 # of the nasal consonant 'n')
 def cut_name(name):
-    norm_name = str_norm(name)
+    name2 = str_norm(name)
 
     ncut = []
     tmp = ''
-    vow_cur = norm_name[0] in vow
+    vow_cur = name2[0] in vow
 
-    for i, letter in enumerate(norm_name):
+    for i, letter in enumerate(name2):
         vow_now = letter in vow
-        # two consecutive and different vowels can be grouped;
-        # two consecutive consonants can also be grouped
+        is_last_letter = i + 1 == len(name2)
+        followed_by_cons = False
+        if not is_last_letter:
+            followed_by_cons = name2[i + 1] in cons and name2[i + 1] != 'n'
+        # general case: a group consists of two letters,
+        # either two consonants or two different vowels
         if vow_now == vow_cur:
-            if len(tmp) == 2:
-                ncut.append(tmp)
-                tmp = ''
-            elif letter in vow and tmp == letter:
+            full_tmp = len(tmp) == 2
+            vow_repeat = letter in vow and tmp == letter
+            if full_tmp or vow_repeat:
                 ncut.append(tmp)
                 tmp = ''
             tmp += letter
-        # a vowel followed by the nasal consonant 'n'
-        # can be grouped with it
-        elif letter == 'n' and (i + 1 == len(norm_name) or (norm_name[i + 1] in cons and norm_name[i + 1] != 'n')):
+        # special case: the nasal consonant 'n'
+        # can also be grouped with a vowel group
+        elif letter == 'n' and (is_last_letter or followed_by_cons):
             tmp += letter
             ncut.append(tmp)
             vow_cur = vow_now
