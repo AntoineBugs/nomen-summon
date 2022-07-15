@@ -38,6 +38,7 @@ class Character:
 
         for group, assoc in self.groups.items():
             its, occ = assoc['its'], assoc['occ']
+            globals = assoc['globals']
             skill = {}
 
             if group[-1] != 'n':
@@ -61,8 +62,8 @@ class Character:
             tot_added_values += its_sum
 
             inventory = []
-            for it, value_it in zip(its, values_from_its):
-                spec = dict(name=value_it[0], type=value_it[2])
+            for it, value_it, glob in zip(its, values_from_its, globals):
+                spec = dict(name=value_it[0], type=value_it[2], all=glob)
                 if value_it[2] != 'inclassable':
                     if value_it[2] == 'objet':
                         coeff = (53 - self.nobility) / 26

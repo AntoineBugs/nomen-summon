@@ -71,46 +71,50 @@ def label_cuts(ncut):
 
 # Groups consonants with their respective vowels
 def group_cuts(ncut, lcut):
-    # updates an occurrence dict d
+    # updates an occurrence dict dictionary
     # by adding occurrences o
-    # and items v
-    def upd_dict(dictionary, key, values, o):
+    # and items values
+    # with characteristic 'all' to values
+    def upd_dict(dictionary, key, values, o, all=False):
         ud = dictionary.get(key, {})
         ud['occ'] = ud.get('occ', 0) + o
         its_list = ud.get('its', [])
         its_list += values
         ud['its'] = its_list
+        globals = ud.get('globals', [])
+        globals.append(all)
+        ud['globals'] = globals
         dictionary[key] = ud
 
     l_init = lcut[0]
     d, k, v = {}, '', []
     new_occ = hanging = False
     for cut, label in zip(ncut, lcut):
-        if label == 0:
+        if label == 0:  # consonant group
             v.append(cut)
-            if l_init > 0:
+            if l_init > 0:  # linked to previous vowel group k
                 upd_dict(d, k, v, 1 if new_occ else 0)
                 v = []
                 new_occ = hanging = False
-            else:
+            else:           # linked to future vowel group, or all
                 hanging = True
-        else:
-            if hanging and l_init > 0:
+        else:           # vowel group
+            if hanging and l_init > 0:  # hanging linked to last vowel group k
                 upd_dict(d, k, v, 1)
                 v = []
             k = cut
-            if l_init == 0:
+            if l_init == 0:             # linked to previous consonant group v
                 upd_dict(d, k, v, 1)
                 k = ''
                 v = []
                 hanging = False
-            else:
+            else:                       # linked to future consonant group
                 hanging = True
             new_occ = True
-    if k != '':
+    if k != '':         # leftover vowel group k
         upd_dict(d, k, v, 1 if new_occ else 0)
-    elif len(v) > 0:
+    elif len(v) > 0:    # leftover consonant group v
         for x in d:
-            upd_dict(d, x, v, 0)
+            upd_dict(d, x, v, 0, all=True)
 
     return d
