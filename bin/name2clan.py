@@ -30,33 +30,22 @@ def wipe_inner(s):
     return new
 
 
-# Iterated outer wipe, until another iteration
+# Iterated 'wiper' wipe, until another iteration
 # would completely erase the string
-def get_heart(name):
+def wipe_along(name, wiper):
     old = str_norm(name)
     new = old
     while len(new) > 0:
         old = new
-        new = wipe_outer(old)
-    return old
-
-
-# Iterated inner wipe, until another iteration
-# would completely erase the string
-def get_mantle(name):
-    old = str_norm(name)
-    new = old
-    while len(new) > 0:
-        old = new
-        new = wipe_inner(old)
+        new = wiper(old)
     return old
 
 
 class GeneticProfile:
 
     def __init__(self, name):
-        self.heart = get_heart(name)
-        self.mantle = get_mantle(name)
+        self.heart = wipe_along(name, wipe_outer)
+        self.mantle = wipe_along(name, wipe_inner)
         self.genes = self.heart + self.mantle
 
         self._compute_gene_adv()
@@ -73,8 +62,9 @@ class GeneticProfile:
     # Computes the purity and nobility indices,
     # by averaging the "heart" and "mantle" respectively
     def _compute_ranks(self):
-        h = [ord(c) - ord('a') + 1 for c in self.heart]
-        self.purity = sum(h) / len(h)
+        
+        def ratio(root):
+            r = [ord(c) - ord('a') + 1 for c in root]
+            return sum(r) / len(r)
 
-        m = [ord(c) - ord('a') + 1 for c in self.mantle]
-        self.nobility = sum(m) / len(m)
+        self.purity, self.nobility = ratio(self.heart), ratio(self.mantle)

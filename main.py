@@ -1,9 +1,10 @@
 import os
-import bin.name2species as nts
-import bin.name2clan as ntc
+from bin.name2species import SpeciesProfile
+from bin.name2clan import GeneticProfile
 from bin.utils import str_norm, cut_name, label_cuts, group_cuts
 from math import floor
 import pickle
+import output
 
 
 class Character:
@@ -11,8 +12,8 @@ class Character:
     def __init__(self, firstN, familyN):
         self.firstN = firstN
         self.familyN = familyN
-        self.species = nts.SpeciesProfile(self.firstN, self.familyN)
-        self.clan = ntc.GeneticProfile(self.familyN)
+        self.species = SpeciesProfile(self.firstN, self.familyN)
+        self.clan = GeneticProfile(self.familyN)
         self.tot_size, self.pow_size, self.groups = self.compute_apts()
         self.skills, self.level = self.extract_apts()
 
@@ -40,8 +41,7 @@ class Character:
         nobility = self.clan.nobility
         purity = self.clan.purity
 
-        tot_skills_lvl = 0
-        tot_added_values = 0
+        tot_skills_lvl = tot_added_values = 0
 
         skillset = []
 
@@ -147,105 +147,33 @@ class Character:
 # Prompts the first and last names and computes the Character object
 def make_char():
     err_msg = "Votre entrée ne peut contenir que des lettres (accents permis), des espaces et des traits d'union."
-    prenom, nom = "", ""
-
-    p2def = True
-    while p2def:
-        prenom = input('Tapez un prénom et appuyez sur Entrée : ')
-        p2def = not str_norm(prenom).isalpha()
-        if p2def:
-            print(err_msg)
-    n2def = True
-    while n2def:
-        nom = input('Tapez un nom de famille et appuyez sur Entrée : ')
-        n2def = not str_norm(nom).isalpha()
-        if n2def:
-            print(err_msg)
+    
+    def get_word(nature):
+        w2def = True
+        while w2def:
+            word = input(f'Tapez {nature} et appuyez sur Entrée : ')
+            w2def = not str_norm(word).isalpha()
+            if w2def:
+                print(err_msg)
+        return word
+    
+    prenom = get_word("un prénom")
+    nom = get_word("un nom de famille")
     return Character(prenom, nom)
 
 
-# Builds a string for an aptitude 
-def skill2str(skill):
-    name = skill['name']
-    desc = skill['desc']
-    lvl = skill['level']
-    its = skill['items']
-
-    s = "· {} niveau {}\n".format(name.capitalize(), lvl)
-    s += '\t' + desc + '\n'
-    if len(its) > 0:
-        s += "\tInventaire :"
-        for it in its:
-            if it['type'] != "inclassable":
-                s += "\n\t· {} niveau {}".format(it['name'].capitalize(), it['level'])
-            else:
-                s += "\n\t· {}".format(it['name'].capitalize())
-
-    return s
+def simple_ops():
+    ch = make_char()
+    print()
+    output.print_char(ch)
 
 
-# Prints a Character object
-def print_char(chara):
-    fir = chara.firstN  #
-    fam = chara.familyN  #
-    lvl = chara.level  #
-
-    sp = chara.species  #
-    sp_n = sp.species  #
-    # sp_d = sp.desc  #
-
-    clan = chara.clan  #
-    cl_a = clan.gene_adv  #
-    advantages_list = []
-    for k, v in cl_a.items():
-        if v > 1:
-            advantages_list.append(k)
-    adv = []
-    if len(advantages_list) < 1:
-        adv.append("aucun")
-    else:
-        if 'a' in advantages_list:
-            adv.append("la magie")
-        if 'e' in advantages_list:
-            adv.append("l'archerie")
-        if 'i' in advantages_list:
-            adv.append("l'escrime")
-        if 'o' in advantages_list:
-            adv.append("la lutte")
-        if 'u' in advantages_list:
-            adv.append("l'acrobatie")
-        if 'y' in advantages_list:
-            adv.append("la science")
-    cl_n = clan.nobility  #
-    cl_p = clan.purity  #
-
-    sk = chara.skills
-
-    header = "*** {} {} - {} niveau {} ***".format(fir, fam, sp_n.capitalize(), lvl)
-    body_spec = "Description de l'espèce :\n\t{}".format(sp.desc)
-
-    body_clan = "Détails du clan :\n"
-    genetic_advantages = ', '.join(adv)
-    body_clan += "\tAvantages génétiques " + (
-        ": " if len(advantages_list) <= 0 else "pour ") + genetic_advantages + ".\n "
-    body_clan += "\tNoblesse de lignée : {}\n".format(cl_n)
-    body_clan += "\tPureté de lignée : {}\n".format(cl_p)
-    body_clan += "~ Les indices de noblesse et de pureté sont situés entre 1 (pureté ou noblesse maximale) et 26 (" \
-                 "pureté ou noblesse minimale) ~\n "
-
-    body_skills = "Aptitudes et pouvoirs :\n"
-    for a in sk:
-        body_skills += skill2str(a) + '\n'
-
-    s = '\n'.join([header, body_spec, body_clan, body_skills])
-    # len_max = max(len(l) for l in s.splitlines())
-    # bar = len_max*'-' + '\n'
-    # print(bar + s + bar)
-    print(s)
-
+def write_ops(filename, show=False):
+    ch = make_char()
+    with open(filename, 'wt', encoding='utf8') as f:
+        f.write(output.print_char(ch, show))
 
 # ### EXECUTION ####
 
-ch = make_char()
-print()
-print_char(ch)
+# simple_ops()
+write_ops('char.txt')
