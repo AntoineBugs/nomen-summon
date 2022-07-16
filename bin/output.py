@@ -5,7 +5,8 @@ def main_usage():
     s = 'Usage :\n'
     l = [
         'main.py [-h|--help]',
-        'main.py <-f filename <-a>> <first_n last_n>'
+        'main.py <-f filename <-a>> <first_n last_n <first_n2 last_n2 ...>>',
+        'main.py -r config_file'
     ]
     t = '\n'.join(l)
     return s + t
@@ -15,6 +16,7 @@ def item2str(item):
     s = f"\n\t· {item['name'].capitalize()}"
     if item['type'] != "inclassable":
         s += f" niveau {item['level']}/100"
+    s += '\n'
     return s
 
 
@@ -97,6 +99,7 @@ def print_char(chara, show=True):
         body_global_inv = "Inventaire global :"
         for it in global_inv.values():
             body_global_inv += item2str(it)
+        body_global_inv += '\n'
 
     s = '\n'.join([header, body_spec, body_clan, body_skills, body_global_inv])
     
