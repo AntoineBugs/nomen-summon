@@ -1,5 +1,4 @@
 from math import floor
-from re import A
 
 from bin.name2clan import GeneticProfile
 from bin.name2species import SpeciesProfile

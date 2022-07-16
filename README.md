@@ -27,7 +27,15 @@ The program will then print your "character sheet", with in order:
 4. the list of their abilities (classes and powers), detailing:
   - the level of mastery;
   - the description of the ability;
-  - the pieces of inventory used by your character in conjunction with this ability.
+  - the pieces of inventory used by your character in conjunction with this ability;
+  - other pieces of inventory used in conjuction with all abilities.
+
+### More execution options :
+
+```bash
+main.py [-h|--help]
+main.py <-f filename> <first_n last_n>
+```
 
 ---
 

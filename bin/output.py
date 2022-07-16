@@ -1,6 +1,16 @@
 from bin.data_access import find_mastery_lvl
 
 
+def main_usage():
+    s = 'Usage :\n'
+    l = [
+        'main.py [-h|--help]',
+        'main.py <-f filename> <first_n last_n>'
+    ]
+    t = '\n'.join(l)
+    return s + t
+
+
 def item2str(item):
     s = f"\n\t· {item['name'].capitalize()}"
     if item['type'] != "inclassable":
