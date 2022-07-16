@@ -34,7 +34,7 @@ The program will then print your "character sheet", with in order:
 
 ```bash
 main.py [-h|--help]
-main.py <-f filename> <first_n last_n>
+main.py <-f filename <-a>> <first_n last_n>
 ```
 
 ---

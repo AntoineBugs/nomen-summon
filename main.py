@@ -29,8 +29,8 @@ def simple_ops(ch):
     output.print_char(ch)
 
 
-def write_ops(ch, filename, show=False):
-    with open(filename, 'wt', encoding='utf8') as f:
+def write_ops(ch, filename, show=False, mode='wt'):
+    with open(filename, mode, encoding='utf8') as f:
         f.write(output.print_char(ch, show))
     print(f"Fiche écrite dans {filename}")
 
@@ -40,21 +40,26 @@ def write_ops(ch, filename, show=False):
 filename = "char.txt"
 args = sys.argv
 if len(args) > 1:
-    if args[1] in ['-h', '--help'] or len(args) not in [3, 5]:
+    if args[1] in ['-h', '--help'] or len(args) not in [3, 5, 6]:
         print(output.main_usage())
         exit()
     start = 1
     in_file = False
     if args[1] == '-f':
         filename = args[2]
-        start = 3
         in_file = True
+        if args[3] == '-a':
+            mode = 'at'
+            start = 4
+        else:
+            mode = 'wt'
+            start = 3
     firstN = lastN = None
     if start + 1 < len(args):
         firstN = args[start]
         lastN = args[start + 1]
     ch = make_char(firstN, lastN)
-    write_ops(ch, filename) if in_file else simple_ops(ch)
+    write_ops(ch, filename, mode=mode) if in_file else simple_ops(ch)
 else:
     ch = make_char()
     simple_ops(ch)
