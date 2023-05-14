@@ -4,13 +4,14 @@ import sys
 
 
 # Species
-species_list = ["loup-garou", "ange", "orc", "harpie", "dragonide", "gobelin", "nain",
-                "faune", "elfe", "félice", "vampire", "reptilien", "géant", "humain",
-                "démon", "naga", "fée", "féloure", "selkie", "gnome", "centaure",
-                "troll", "kelpie", "sirène", "golem", "minotaure"]
+species_list = ["loup-garou", "ange", "orc", "harpie", "dragonide",
+                "gobelin", "nain", "faune", "elfe", "félice", "vampire",
+                "reptilien", "géant", "humain", "démon", "naga", "fée",
+                "féloure", "selkie", "gnome", "centaure", "troll",
+                "kelpie", "sirène", "golem", "minotaure"]
 
 
-filename = os.path.join("nomen-summon", "data", "species.txt")
+filename = os.path.join("data", "species.txt")
 with open(filename, "rt", encoding='utf8') as file:
     species_desc = file.readlines()
     for i, line in enumerate(species_desc):
@@ -23,7 +24,7 @@ species_dict = {index: t for index, t in enumerate(species_zip)}
 
 # Items
 item_classes = {'bmp': ('armure/bouclier', 3, 'objet'),
-                'gr': ('membre', 8, 'inclassable'),
+                'gr': ('altération physique', 8, 'inclassable'),
                 'dnt': ('arme/outil', 8, 'objet'),
                 'fvw': ('personnalisation', 0, 'autre'),
                 'h': ('vêtement/accessoire', 1, 'objet'),
@@ -38,9 +39,9 @@ composed_items = {'bmp+gr': ('prothèse défensive', 11, 'objet'),
                   'bmp+cklqx': ('armure de puissance', 13, 'objet'),
                   'bmp+jsz': ('armure vivante', 8, 'autre'),
                   'gr+dnt': ('prothèse offensive', 16, 'objet'),
-                  'gr+fvw': ('relique', 8, 'autre'),
-                  'gr+h': ('greffe', 9, 'autre'),
-                  'gr+cklqx': ('membre entraîné', 18, 'autre'),
+                  'gr+fvw': ('membre/organe supplémentaire', 8, 'autre'),
+                  'gr+h': ('augmentation physique', 9, 'autre'),
+                  'gr+cklqx': ('relique', 18, 'autre'),
                   'gr+jsz': ('symbiote', 13, 'autre'),
                   'dnt+fvw': ('arme familiale', 8, 'objet'),
                   'dnt+h': ('belle arme', 9, 'objet'),
@@ -51,7 +52,7 @@ composed_items = {'bmp+gr': ('prothèse défensive', 11, 'objet'),
                   'fvw+jsz': ('esprit protecteur', 5, 'autre'),
                   'h+cklqx': ('tenue de combat', 11, 'objet'),
                   'h+jsz': ('monture', 6, 'autre'),
-                  'cklqx+jsz': ('animal domestique', 15, 'autre')
+                  'cklqx+jsz': ('gardien de trésor', 15, 'autre')
                   }
 
 
@@ -64,12 +65,18 @@ for i, v in enumerate(l[:-1]):
     class_letters.extend([v + w for w in list(vowels)[next:]])
 
 # Classes
-class_names = ['mage', 'archer', 'bretteur', 'lutteur', 'acrobate', 'technicien',
-                 'aéronaute', 'paladin', 'berserker', 'danseur', 'alchimiste', 'chevalier',
-                 'chasseur', 'éclaireur', 'pistolier', 'gladiateur', 'assassin', 'forgeron',
-                 'artiste martial', 'médecin', 'voleur']
+class_names = ['mage', 'archer', 'bretteur', 'lutteur', 'acrobate',
+                'technicien', 'aéronaute', 'paladin', 'berserker',
+                'barde', 'alchimiste', 'chevalier', 'chasseur',
+                'éclaireur', 'pistolier', 'gladiateur', 'assassin',
+                'forgeron', 'danseur', 'soigneur', 'voleur']
+# A E I O U
+# Y AE AI AO
+# AU AY EI EO
+# EU EY IO IU
+# IY OU OY UY
 
-filename = os.path.join("nomen-summon", "data", "classes.txt")
+filename = os.path.join("data", "classes.txt")
 with open(filename, 'rt', encoding='utf8') as file:
     class_desc = file.readlines()
     for i, line in enumerate(class_desc):
@@ -79,12 +86,20 @@ class_zip = list(zip(class_letters, class_names, class_desc))
 class_dict = {l: {'name': n, 'desc': d} for (l, n, d) in class_zip}
 
 # Powers
-power_names = ["saint", "élémentaliste", "chaman", "métamorphe", "téléporteur",
-                "télépathe", "purificateur", "pactisant", "guérisseur", "psychopompe",
-                "marionnettiste", "prophète", "druide", "météomage", "faiseur de golems",
-                "avatar", "invocateur", "vaudou", "caméléon", "doppelganger", "onironaute"]
+power_names = ["arcaniste", "élémentaliste", "chaman", "métamorphe",
+                "téléporteur", "télépathe", "évocateur", "pactisant",
+                "nécromancien", "marche-temps", "marionnettiste",
+                "enchanteur", "druide", "météomage", "faiseur de golems",
+                "avatar", "invocateur", "marabout", "métromage",
+                "doppelganger", "onironaute"]
+# A E I O
+# U Y AE AI
+# AO AU AY
+# EI EO EU EY
+# IO IU IY OU
+# OY UY
 
-filename = os.path.join("nomen-summon", "data", "powers.txt")
+filename = os.path.join("data", "powers.txt")
 with open(filename, 'rt', encoding='utf8') as file:
     power_desc = file.readlines()
     for i, line in enumerate(power_desc):
