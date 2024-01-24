@@ -11,7 +11,8 @@ species_list = ["loup-garou", "ange", "orc", "harpie", "dragonide",
                 "kelpie", "sirène", "golem", "minotaure"]
 
 
-filename = os.path.join("data", "species.txt")
+filename = os.path.join(os.path.dirname(__file__), 
+                        "..", "data", "species.txt")
 with open(filename, "rt", encoding='utf8') as file:
     species_desc = file.readlines()
     for i, line in enumerate(species_desc):
@@ -76,7 +77,8 @@ class_names = ['mage', 'archer', 'bretteur', 'lutteur', 'acrobate',
 # EU EY IO IU
 # IY OU OY UY
 
-filename = os.path.join("data", "classes.txt")
+filename = os.path.join(os.path.dirname(__file__), 
+                        "..", "data", "classes.txt")
 with open(filename, 'rt', encoding='utf8') as file:
     class_desc = file.readlines()
     for i, line in enumerate(class_desc):
@@ -99,7 +101,8 @@ power_names = ["arcaniste", "élémentaliste", "chaman", "métamorphe",
 # IO IU IY OU
 # OY UY
 
-filename = os.path.join("data", "powers.txt")
+filename = os.path.join(os.path.dirname(__file__), 
+                        "..", "data", "powers.txt")
 with open(filename, 'rt', encoding='utf8') as file:
     power_desc = file.readlines()
     for i, line in enumerate(power_desc):
