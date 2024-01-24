@@ -12,8 +12,8 @@ def get_config(filename):
             if l[0] == 'f':
                 path = l[1]
             elif l[0] == 'a':
-                is_append = bool(l[1])
-                mode = 'at' if is_append else 'wt'
+                is_append = l[1]
+                mode = 'at' if is_append == "True" else 'wt'
             else:
                 print("Can't read line:")
                 print(' '.join(l))
