@@ -84,10 +84,11 @@ composed_items = {
 items_dict = {"simple": item_classes, "composed": composed_items}
 
 vowels = "aeiouy"
-class_letters = list_vowels = list(vowels)
+list_vowels = list(vowels)
+class_letters = list_vowels.copy()
 for i, v in enumerate(list_vowels[:-1]):
-    next = i + 1
-    class_letters.extend([v + w for w in list_vowels[next:]])
+    for w in list_vowels[i + 1 :]:
+        class_letters.append(v + w)
 
 # Classes
 class_names = [

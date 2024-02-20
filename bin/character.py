@@ -35,40 +35,36 @@ class Character:
 
     # computes the aptitude levels
     def extract_apts(self):
-        tot_skills_lvl = tot_added_values = 0
+        self.tot_skills_lvl = self.tot_added_values = 0
         skillset = []
 
         for group, assoc in self.groups.items():
-            self.update_skillset(
-                tot_added_values, tot_skills_lvl, skillset, group, assoc
-            )
+            self.update_skillset(skillset, group, assoc)
 
-        level = self.get_level(tot_added_values, tot_skills_lvl)
+        level = self.get_level()
 
         return skillset, level
 
-    def get_level(self, tot_added_values, tot_skills_lvl):
-        skill_part = tot_skills_lvl / 100
+    def get_level(self):
+        skill_part = self.tot_skills_lvl / 100
         skill_part += 1
 
         remainder = 100 * (self.tot_size - self.pow_size) / self.pow_size
-        remainder += 100 + tot_added_values
+        remainder += 100 + self.tot_added_values
 
         level = floor(skill_part * remainder)
         return level
 
-    def update_skillset(self, tot_added_values, tot_skills_lvl, skillset, group, assoc):
+    def update_skillset(self, skillset, group, assoc):
         its, occ = assoc["its"], assoc["occ"]
         globals = assoc["globals"]
+
         skill = {}
-
         key = self.find_apt(group, skill)
-
         values_from_its, its_sum = self.compute_levels(its, occ, skill, key)
 
-        tot_skills_lvl += skill["level"]
-        tot_added_values += its_sum
-
+        self.tot_skills_lvl += skill["level"]
+        self.tot_added_values += its_sum
         skill["items"] = self.get_inventory(its, globals, values_from_its)
 
         skillset.append(skill)
@@ -90,8 +86,8 @@ class Character:
             src = apts["powers"]
             key = "".join(sorted(group[:-1])) + "n"
         apt = src[key]
-        skill["name"] = apt["name"]
-        skill["desc"] = apt["desc"]
+        for k in "name", "desc":
+            skill[k] = apt[k]
         return key
 
     def get_inventory(self, its, globals, values_from_its):

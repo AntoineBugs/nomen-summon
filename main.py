@@ -98,20 +98,7 @@ def chaos_exec(args):
 # Prompts the first and last names and computes the Character object
 def make_char(prenom=None, nom=None, ref=None, birth=None):
     if not (prenom and nom):
-        err_msg = "Votre entrée ne peut contenir que des lettres (accents permis),"
-        err_msg += " des espaces et des traits d'union."
-
-        def get_word(nature):
-            w2def = True
-            while w2def:
-                word = input(f"Tapez {nature} et appuyez sur Entrée : ")
-                w2def = not str_norm(word).isalpha()
-                if w2def:
-                    print(err_msg)
-            return word
-
-        prenom = get_word("un prénom")
-        nom = get_word("un nom de famille")
+        prenom, nom = get_names()
 
     if ref and not birth:
         birth = get_birth()
@@ -121,6 +108,24 @@ def make_char(prenom=None, nom=None, ref=None, birth=None):
         return Character(prenom, nom, act_prenom, act_nom)
 
     return Character(prenom, nom)
+
+
+def get_names():
+    err_msg = "Votre entrée ne peut contenir que des lettres (accents permis),"
+    err_msg += " des espaces et des traits d'union."
+
+    def get_word(nature):
+        w2def = True
+        while w2def:
+            word = input(f"Tapez {nature} et appuyez sur Entrée : ")
+            w2def = not str_norm(word).isalpha()
+            if w2def:
+                print(err_msg)
+        return word
+
+    prenom = get_word("un prénom")
+    nom = get_word("un nom de famille")
+    return prenom, nom
 
 
 def get_birth():

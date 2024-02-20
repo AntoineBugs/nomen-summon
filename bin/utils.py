@@ -91,6 +91,7 @@ def group_cuts(ncut, lcut):
         k, values, new_occ = group_one_cut(
             l_init, dictionary, k, values, new_occ, prev_cut, cut, label
         )
+        prev_cut = cut
     if k != "":  # leftover vowel group k
         upd_dict(dictionary, k, values, 1 if new_occ else 0)
     elif len(values) > 0:  # leftover consonant group v
@@ -101,13 +102,13 @@ def group_cuts(ncut, lcut):
 
 
 def group_one_cut(l_init, dictionary, k, values, new_occ, prev_cut, cut, label):
+    hanging = False
     if label == 0:  # consonant group
         values, hanging = consonant_group(l_init, dictionary, k, values, new_occ, cut)
     else:  # vowel group
         k, values, new_occ = vowel_group(
             l_init, dictionary, k, values, prev_cut, cut, hanging
         )
-    prev_cut = cut
     return k, values, new_occ
 
 

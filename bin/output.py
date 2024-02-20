@@ -5,9 +5,9 @@ def main_usage():
     s = "Usage :\n"
     lines = [
         "main.py -h | --help",
-        "main.py [-f <filename> [-a]] [<full_name> [<full_name_2> ...]]",
+        "main.py [-f <filename> [-a]] [<full_name> [...]]",
         "\ta full_name is of the form <first_n> <last_n>.",
-        "main.py -c <ref_date> [<full_name> <date> [<full_name_2> <date_2> ...]]"
+        "main.py -c <ref_date> [<full_name> <date> [...]]",
         "\ta date or ref_date is of the form 'YYYY-MM-DD'.",
         "main.py -r <config_file>",
     ]
