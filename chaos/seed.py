@@ -56,6 +56,11 @@ def change_letters(shift: float, fmin, fmax, vowels: str, string: str):
     chars = "".join(words)
     extent = size ** len(chars)
     seed = int(interval_conversion(shift, fmin, fmax, 0, extent - 1))
+    new_words = change_words(vowels, consonants, size, lens, chars, seed)
+    return " ".join(new_words)
+
+
+def change_words(vowels, consonants, size, lens, chars, seed):
     new_words = [[]]
     cur_w = 0
     past_w = 0
@@ -73,7 +78,7 @@ def change_letters(shift: float, fmin, fmax, vowels: str, string: str):
             new_words.append([])
         new_words[cur_w].append(new_char)
     new_words = ["".join(w) for w in new_words]
-    return " ".join(new_words)
+    return new_words
 
 
 def shift_char(char: str, letter_shift: int, among: str):

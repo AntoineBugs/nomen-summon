@@ -27,30 +27,43 @@ def cut_name(name):
         followed_by_cons = False
         if not is_last_letter:
             followed_by_cons = name2[i + 1] in cons and name2[i + 1] != "n"
-        # general case: a group consists of two letters,
-        # either two consonants or two different vowels
         if vow_now == vow_cur:
-            full_tmp = len(tmp) == 2
-            vow_repeat = letter in vow and tmp == letter
-            if full_tmp or vow_repeat:
-                ncut.append(tmp)
-                tmp = ""
-            tmp += letter
-        # special case: the nasal consonant 'n'
-        # can also be grouped with a vowel group
-        elif letter == "n" and (is_last_letter or followed_by_cons):
-            tmp += letter
-            ncut.append(tmp)
-            vow_cur = vow_now
-            tmp = ""
-        # for any other case, the cut is systematic
+            # general case: a group consists of two letters,
+            # either two consonants or two different vowels
+            tmp = two_letters_group(ncut, tmp, letter)
         else:
-            vow_cur = vow_now
-            ncut.append(tmp)
-            tmp = letter
+            tmp, vow_cur = other_group(
+                ncut, tmp, letter, vow_now, is_last_letter, followed_by_cons
+            )
     if tmp != "":
         ncut.append(tmp)
     return ncut
+
+
+def other_group(ncut, tmp, letter, vow_now, is_last_letter, followed_by_cons):
+    # special case: the nasal consonant 'n'
+    # can also be grouped with a vowel group
+    if letter == "n" and (is_last_letter or followed_by_cons):
+        tmp += letter
+        ncut.append(tmp)
+        vow_cur = vow_now
+        tmp = ""
+    # for any other case, the cut is systematic
+    else:
+        vow_cur = vow_now
+        ncut.append(tmp)
+        tmp = letter
+    return tmp, vow_cur
+
+
+def two_letters_group(ncut, tmp, letter):
+    full_tmp = len(tmp) == 2
+    vow_repeat = letter in vow and tmp == letter
+    if full_tmp or vow_repeat:
+        ncut.append(tmp)
+        tmp = ""
+    tmp += letter
+    return tmp
 
 
 # Labels each cut : 0 for consonants,
@@ -70,49 +83,14 @@ def label_cuts(ncut):
 
 # Groups consonants with their respective vowels
 def group_cuts(ncut, lcut):
-    # updates an occurrence dict dictionary
-    # by adding occurrences o
-    # and items values
-    # with characteristic 'all' to values
-    def upd_dict(dictionary, key, values, o, all=False, repeat=False):
-        ud = dictionary.get(key, {})
-        ud["occ"] = ud.get("occ", 0) + o
-        its_list = ud.get("its", [])
-        ud["its"] = its_list + values
-        globals = ud.get("globals", [])
-        if not repeat:
-            globals.append(all)
-        ud["globals"] = globals
-        dictionary[key] = ud
-
     l_init = lcut[0]
     dictionary, k, values = {}, "", []
-    new_occ = hanging = False
+    new_occ = False
     prev_cut = ""
     for cut, label in zip(ncut, lcut):
-        if label == 0:  # consonant group
-            values.append(cut)
-            if l_init > 0:  # linked to previous vowel group k
-                upd_dict(dictionary, k, values, 1 if new_occ else 0)
-                values = []
-                new_occ = hanging = False
-            else:  # linked to future vowel group, or all
-                hanging = True
-        else:  # vowel group
-            if hanging and l_init > 0:  # hanging linked to last vowel group k
-                upd_dict(dictionary, k, values, 1)
-                values = []
-            repeat = prev_cut == cut
-            k = cut
-            if l_init == 0:  # linked to previous consonant group v
-                upd_dict(dictionary, k, values, 1, repeat=repeat)
-                k = ""
-                values = []
-                hanging = False
-            else:  # linked to future consonant group
-                hanging = True
-            new_occ = True
-        prev_cut = cut
+        k, values, new_occ = group_one_cut(
+            l_init, dictionary, k, values, new_occ, prev_cut, cut, label
+        )
     if k != "":  # leftover vowel group k
         upd_dict(dictionary, k, values, 1 if new_occ else 0)
     elif len(values) > 0:  # leftover consonant group v
@@ -120,3 +98,58 @@ def group_cuts(ncut, lcut):
             upd_dict(dictionary, x, values, 0, True)
 
     return dictionary, values
+
+
+def group_one_cut(l_init, dictionary, k, values, new_occ, prev_cut, cut, label):
+    if label == 0:  # consonant group
+        values, hanging = consonant_group(l_init, dictionary, k, values, new_occ, cut)
+    else:  # vowel group
+        k, values, new_occ = vowel_group(
+            l_init, dictionary, k, values, prev_cut, cut, hanging
+        )
+    prev_cut = cut
+    return k, values, new_occ
+
+
+def vowel_group(l_init, dictionary, k, values, prev_cut, cut, hanging):
+    if hanging and l_init > 0:  # hanging linked to last vowel group k
+        upd_dict(dictionary, k, values, 1)
+        values = []
+    repeat = prev_cut == cut
+    k = cut
+    if l_init == 0:  # linked to previous consonant group v
+        upd_dict(dictionary, k, values, 1, repeat=repeat)
+        k = ""
+        values = []
+        hanging = False
+    else:  # linked to future consonant group
+        hanging = True
+    new_occ = True
+    return k, values, new_occ
+
+
+def consonant_group(l_init, dictionary, k, values, new_occ, cut):
+    values.append(cut)
+    if l_init > 0:  # linked to previous vowel group k
+        upd_dict(dictionary, k, values, 1 if new_occ else 0)
+        values = []
+        new_occ = hanging = False
+    else:  # linked to future vowel group, or all
+        hanging = True
+    return values, hanging
+
+
+# updates an occurrence dict dictionary
+# by adding occurrences o
+# and items values
+# with characteristic 'all' to values
+def upd_dict(dictionary, key, values, o, all=False, repeat=False):
+    ud = dictionary.get(key, {})
+    ud["occ"] = ud.get("occ", 0) + o
+    its_list = ud.get("its", [])
+    ud["its"] = its_list + values
+    globals = ud.get("globals", [])
+    if not repeat:
+        globals.append(all)
+    ud["globals"] = globals
+    dictionary[key] = ud

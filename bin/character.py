@@ -39,48 +39,15 @@ class Character:
         skillset = []
 
         for group, assoc in self.groups.items():
-            its, occ = assoc["its"], assoc["occ"]
-            globals = assoc["globals"]
-            skill = {}
+            self.update_skillset(
+                tot_added_values, tot_skills_lvl, skillset, group, assoc
+            )
 
-            if group[-1] != "n":
-                src = apts["classes"]
-                key = "".join(sorted(group))
-            else:
-                src = apts["powers"]
-                key = "".join(sorted(group[:-1])) + "n"
-            apt = src[key]
-            skill["name"] = apt["name"]
-            skill["desc"] = apt["desc"]
+        level = self.get_level(tot_added_values, tot_skills_lvl)
 
-            size = occ * len(key)
-            lvl = 100 * size / self.pow_size  # base level
-            values_from_its = self.extract_items(its, items)
-            its_sum = sum([it[1] for it in values_from_its])  # items added value
-            adv = self.key2adv(key, self.advantage)  # genetic advantage
-            skill["level"] = floor(adv * (its_sum + lvl))  # advanced level
+        return skillset, level
 
-            tot_skills_lvl += skill["level"]
-            tot_added_values += its_sum
-
-            inventory = []
-            for it, value_it, glob in zip(its, values_from_its, globals):
-                spec = dict(name=value_it[0], type=value_it[2], all=glob)
-                if value_it[2] != "inclassable":
-                    if value_it[2] == "objet":
-                        coeff = (53 - self.nobility) / 26
-                    else:
-                        coeff = (53 - self.purity) / 26
-                    size = len(it)
-                    spec["level"] = floor(100 * coeff * size / self.pow_size)
-                inventory.append(spec)
-                if glob:
-                    self.global_inv[it] = spec
-
-            skill["items"] = inventory
-
-            skillset.append(skill)
-
+    def get_level(self, tot_added_values, tot_skills_lvl):
         skill_part = tot_skills_lvl / 100
         skill_part += 1
 
@@ -88,51 +55,109 @@ class Character:
         remainder += 100 + tot_added_values
 
         level = floor(skill_part * remainder)
+        return level
 
-        return skillset, level
+    def update_skillset(self, tot_added_values, tot_skills_lvl, skillset, group, assoc):
+        its, occ = assoc["its"], assoc["occ"]
+        globals = assoc["globals"]
+        skill = {}
+
+        key = self.find_apt(group, skill)
+
+        values_from_its, its_sum = self.compute_levels(its, occ, skill, key)
+
+        tot_skills_lvl += skill["level"]
+        tot_added_values += its_sum
+
+        skill["items"] = self.get_inventory(its, globals, values_from_its)
+
+        skillset.append(skill)
+
+    def compute_levels(self, its, occ, skill, key):
+        size = occ * len(key)
+        lvl = 100 * size / self.pow_size  # base level
+        values_from_its = self.extract_items(its, items)
+        its_sum = sum([it[1] for it in values_from_its])  # items added value
+        adv = self.key2adv(key, self.advantage)  # genetic advantage
+        skill["level"] = floor(adv * (its_sum + lvl))  # advanced level
+        return values_from_its, its_sum
+
+    def find_apt(self, group, skill):
+        if group[-1] != "n":
+            src = apts["classes"]
+            key = "".join(sorted(group))
+        else:
+            src = apts["powers"]
+            key = "".join(sorted(group[:-1])) + "n"
+        apt = src[key]
+        skill["name"] = apt["name"]
+        skill["desc"] = apt["desc"]
+        return key
+
+    def get_inventory(self, its, globals, values_from_its):
+        inventory = []
+        for it, value_it, glob in zip(its, values_from_its, globals):
+            spec = dict(name=value_it[0], type=value_it[2], all=glob)
+            if value_it[2] != "inclassable":
+                if value_it[2] == "objet":
+                    coeff = (53 - self.nobility) / 26
+                else:
+                    coeff = (53 - self.purity) / 26
+                size = len(it)
+                spec["level"] = floor(100 * coeff * size / self.pow_size)
+            inventory.append(spec)
+            if glob:
+                self.global_inv[it] = spec
+        return inventory
 
     # computes the item levels
     @staticmethod
     def extract_items(its, items):
-        def find_key(item, source):
-            key_list = [k if item in k else "" for k in source.keys()]
-            return "".join(key_list)
-
-        def find_comp_key(item, inventory):
-            def rev(list_to_reverse):
-                nl = list_to_reverse.copy()
-                nl.reverse()
-                return nl
-
-            simple = inventory["simple"]
-            comp = inventory["composed"]
-            k = [find_key(c, simple) for c in item]
-            composed_key = k[0] != k[1]
-            if composed_key:
-                act_key = find_key("+".join(k), comp)
-                act_key += find_key("+".join(rev(k)), comp)
-            else:
-                act_key = k[0]
-
-            return act_key, composed_key
-
         vals = []
         for it in its:
-            if len(it) == 1:
-                src = items["simple"]
-                key = find_key(it, src)
-                vals.append(src[key])
-            else:
-                key, composed = find_comp_key(it, items)
-                if composed:
-                    src = items["composed"]
-                    vals.append(src[key])
-                else:
-                    src = items["simple"]
-                    (n, v, t) = src[key]
-                    vals.append((n, 2 * v, t))
+            Character.update_vals(items, vals, it)
 
         return vals
+
+    @staticmethod
+    def find_key(item, source):
+        key_list = [k if item in k else "" for k in source.keys()]
+        return "".join(key_list)
+
+    @staticmethod
+    def find_comp_key(item, inventory):
+        def rev(list_to_reverse):
+            nl = list_to_reverse.copy()
+            nl.reverse()
+            return nl
+
+        simple = inventory["simple"]
+        comp = inventory["composed"]
+        k = [Character.find_key(c, simple) for c in item]
+        composed_key = k[0] != k[1]
+        if composed_key:
+            act_key = Character.find_key("+".join(k), comp)
+            act_key += Character.find_key("+".join(rev(k)), comp)
+        else:
+            act_key = k[0]
+
+        return act_key, composed_key
+
+    @staticmethod
+    def update_vals(items, vals, it):
+        if len(it) == 1:
+            src = items["simple"]
+            key = Character.find_key(it, src)
+            vals.append(src[key])
+        else:
+            key, composed = Character.find_comp_key(it, items)
+            if composed:
+                src = items["composed"]
+                vals.append(src[key])
+            else:
+                src = items["simple"]
+                (n, v, t) = src[key]
+                vals.append((n, 2 * v, t))
 
     @staticmethod
     def key2adv(key, advantages):

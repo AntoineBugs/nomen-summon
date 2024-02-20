@@ -53,21 +53,63 @@ gen_classes = {
 # Prints a Character object
 def print_char(chara, show=True):
     fir, fam, lvl = chara.firstN, chara.familyN, chara.level  #
+    sopt = actual_name(chara)
+    sp = chara.species  #
+    sp_n = sp.species  #
+    # sp_d = sp.desc  #
+
+    header = f"*** {fir} {fam}{sopt} - {sp_n.capitalize()} niveau {lvl} ***\n"
+    body_spec = f"Description de l'espèce :\n\t{sp.desc}"
+
+    body_clan = print_clan(chara)
+    body_skills = print_skills(chara)
+    body_global_inv = print_global_inv(chara)
+
+    s = "\n".join([header, body_spec, body_clan, body_skills, body_global_inv])
+
+    if show:
+        print(s)
+    return s
+
+
+def print_clan(chara):
+    advantages_list, adv, cl_n, cl_p = get_clan_data(chara)
+    description = base_clan_desc(advantages_list, adv)
+
+    description.append(f"\tNoblesse de lignée : {cl_n} / {percent(cl_n):.0%}")
+    description.append(f"\tPureté de lignée : {cl_p} / {percent(cl_p):.0%}")
+    description.append("")
+    body_clan = "\n".join(description)
+    return body_clan
+
+
+def actual_name(chara):
     sopt = ""
     if chara.act_firstN and chara.act_lastN:
         sopt = f" ({chara.act_firstN} {chara.act_lastN})"
     elif chara.act_firstN or chara.act_lastN:
         raise TypeError("Missing argument actual_firstN or actual_lastN")
-    sp = chara.species  #
-    sp_n = sp.species  #
-    # sp_d = sp.desc  #
+    return sopt
 
+
+def get_clan_data(chara):
     clan = chara.clan  #
     cl_a = clan.gene_adv  #
+    advantages_list = get_advantages(cl_a)
+    adv = get_adv(advantages_list)
+    cl_n, cl_p = clan.nobility, clan.purity
+    return advantages_list, adv, cl_n, cl_p
+
+
+def get_advantages(cl_a):
     advantages_list = []
     for k, v in cl_a.items():
         if v > 1:
             advantages_list.append(k)
+    return advantages_list
+
+
+def get_adv(advantages_list):
     adv = []
     if len(advantages_list) < 1:
         adv.append("aucun")
@@ -75,35 +117,21 @@ def print_char(chara, show=True):
         for k, v in gen_classes.items():
             if k in advantages_list:
                 adv.append(v)
-    cl_n, cl_p = clan.nobility, clan.purity  #
+    return adv
 
-    sk = chara.skills
 
-    header = f"*** {fir} {fam}{sopt} - {sp_n.capitalize()} niveau {lvl} ***\n"
-    body_spec = f"Description de l'espèce :\n\t{sp.desc}"
+def percent(x):
+    return (26 - x) / 26
 
-    description = []
-    description.append("Détails du clan :")
-    genetic_advantages = ", ".join(adv)
-    s = "\tAvantages génétiques "
-    s += ": " if len(advantages_list) <= 0 else "pour "
-    s += genetic_advantages + "."
-    description.append(s)
 
-    def percent(x):
-        return (26 - x) / 26
-
-    description.append(f"\tNoblesse de lignée : {cl_n} / {percent(cl_n):.0%}")
-    description.append(f"\tPureté de lignée : {cl_p} / {percent(cl_p):.0%}")
-    # s = "~ Les indices de noblesse et de pureté sont situés entre 1 (pureté"
-    # s += " ou noblesse maximale) et 26 (pureté ou noblesse minimale) ~"
-    # l.append(s)
-    body_clan = "\n".join(description) + "\n"
-
+def print_skills(chara):
     body_skills = "Aptitudes et pouvoirs :\n"
-    for a in sk:
+    for a in chara.skills:
         body_skills += skill2str(a) + "\n"
+    return body_skills
 
+
+def print_global_inv(chara):
     body_global_inv = ""
     global_inv = chara.global_inv
     if len(global_inv.keys()) > 0:
@@ -111,9 +139,15 @@ def print_char(chara, show=True):
         for it in global_inv.values():
             body_global_inv += item2str(it)
         body_global_inv += "\n"
+    return body_global_inv
 
-    s = "\n".join([header, body_spec, body_clan, body_skills, body_global_inv])
 
-    if show:
-        print(s)
-    return s
+def base_clan_desc(advantages_list, adv):
+    description = []
+    description.append("Détails du clan :")
+    genetic_advantages = ", ".join(adv)
+    s = "\tAvantages génétiques "
+    s += ": " if len(advantages_list) <= 0 else "pour "
+    s += genetic_advantages + "."
+    description.append(s)
+    return description
