@@ -1,23 +1,39 @@
 import sys
+import os
 
 # Species
 species_list = [
+    "humain",
     "ange",
+    "humain",
     "thérian",
+    "humain",
     "robot",
+    "humain",
     "dragon",
+    "humain",
     "garou",
+    "humain",
     "fée",
     "humain",
+    "humain",
     "elfe",
+    "humain",
     "vampire",
+    "humain",
     "stellaire",
+    "humain",
     "alien",
+    "humain",
     "phytian",
+    "humain",
     "démon",
+    "humain",
 ]
 
-filename = "species.txt"
+filename = os.path.abspath(
+    os.path.join("data", "variants", "urban_fantasy", "species.txt")
+)
 with open(filename, "rt", encoding="utf8") as file:
     species_desc = file.readlines()
     for i, line in enumerate(species_desc):
@@ -34,8 +50,8 @@ item_classes = {
     "cklqx": ("source d'information", 5, "inclassable"),
     "dnt": ("arme", 8, "objet"),
     "fvw": ("vêtement", 3, "autre"),
-    "gr": ("outil", 8, "inclassable"),
-    "h": ("personnalisation", 1, "objet"),
+    "gr": ("outil", 8, "objet"),
+    "h": ("personnalisation", 1, "inclassable"),
     "jsz": ("familier", 5, "autre"),
 }
 
@@ -47,18 +63,18 @@ composed_items = {
     "bmp+h": ("talisman", 4, "objet"),
     "bmp+jsz": ("gardien", 8, "autre"),
     "cklqx+dnt": ("grimoire", 13, "objet"),
-    "cklqx+fvw": ("smart textile", 8, "inclassable"),
-    "cklqx+gr": ("objet connecté", 13, "autre"),
-    "cklqx+h": ("mémo", 6, "objet"),
+    "cklqx+fvw": ("smart textile", 8, "autre"),
+    "cklqx+gr": ("objet connecté", 13, "objet"),
+    "cklqx+h": ("mémo", 6, "autre"),
     "cklqx+jsz": ("assistant virtuel", 10, "autre"),
-    "dnt+fvw": ("tenue de combat", 11, "objet"),
+    "dnt+fvw": ("tenue de combat", 11, "autre"),
     "dnt+gr": ("matériel dangereux", 16, "objet"),
     "dnt+h": ("mod", 9, "objet"),
     "dnt+jsz": ("prédateur", 13, "autre"),
     "fvw+gr": ("uniforme", 11, "autre"),
-    "fvw+h": ("retouche", 4, "objet"),
+    "fvw+h": ("retouche", 4, "autre"),
     "fvw+jsz": ("peluche", 8, "autre"),
-    "gr+h": ("outil custom", 9, "autre"),
+    "gr+h": ("outil custom", 9, "objet"),
     "gr+jsz": ("animal de travail", 13, "autre"),
     "h+jsz": ("symbiote", 6, "autre"),
 }
@@ -99,7 +115,9 @@ class_names = [
     "sorcier·ère",
 ]
 
-filename = "classes.txt"
+filename = os.path.abspath(
+    os.path.join("data", "variants", "urban_fantasy", "classes.txt")
+)
 with open(filename, "rt", encoding="utf8") as file:
     class_desc = file.readlines()
     for i, line in enumerate(class_desc):
@@ -134,7 +152,9 @@ power_names = [
     "oméga",
 ]
 
-filename = "powers.txt"
+filename = os.path.abspath(
+    os.path.join("data", "variants", "urban_fantasy", "powers.txt")
+)
 with open(filename, "rt", encoding="utf8") as file:
     power_desc = file.readlines()
     for i, line in enumerate(power_desc):
@@ -163,3 +183,13 @@ def find_mastery_lvl(lvl):
             mastery = k
             break
     return mastery
+
+
+gen_classes = {
+    "a": "la fiction",
+    "e": "le numérique",
+    "i": "la connaissance",
+    "o": "la création",
+    "u": "l'activisme",
+    "y": "l'ésotérisme",
+}

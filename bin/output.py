@@ -1,4 +1,4 @@
-from bin.data_access import find_mastery_lvl
+from bin.data_access import find_mastery_lvl, gen_classes
 
 
 def main_usage():
@@ -38,16 +38,6 @@ def skill2str(skill):
             if not it["all"]:
                 s += item2str(it)
     return s
-
-
-gen_classes = {
-    "a": "la magie",
-    "e": "l'archerie",
-    "i": "l'escrime",
-    "o": "la lutte",
-    "u": "l'acrobatie",
-    "y": "la science",
-}
 
 
 # Prints a Character object

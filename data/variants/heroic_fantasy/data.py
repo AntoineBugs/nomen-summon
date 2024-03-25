@@ -1,4 +1,5 @@
 import sys
+import os
 
 # Species
 species_list = [
@@ -30,7 +31,7 @@ species_list = [
     "minotaure",
 ]
 
-filename = "species.txt"
+filename = os.path.abspath("species.txt")
 with open(filename, "rt", encoding="utf8") as file:
     species_desc = file.readlines()
     for i, line in enumerate(species_desc):
@@ -112,7 +113,9 @@ class_names = [
     "voleur",
 ]
 
-filename = "classes.txt"
+filename = os.path.abspath(
+    os.path.join("data", "variants", "urban_fantasy", "classes.txt")
+)
 with open(filename, "rt", encoding="utf8") as file:
     class_desc = file.readlines()
     for i, line in enumerate(class_desc):
@@ -147,7 +150,7 @@ power_names = [
     "onironaute",
 ]
 
-filename = "powers.txt"
+filename = os.path.abspath("powers.txt")
 with open(filename, "rt", encoding="utf8") as file:
     power_desc = file.readlines()
     for i, line in enumerate(power_desc):
@@ -176,3 +179,13 @@ def find_mastery_lvl(lvl):
             mastery = k
             break
     return mastery
+
+
+gen_classes = {
+    "a": "la magie",
+    "e": "l'archerie",
+    "i": "l'escrime",
+    "o": "la lutte",
+    "u": "l'acrobatie",
+    "y": "la science",
+}

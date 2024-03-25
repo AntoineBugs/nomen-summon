@@ -6,6 +6,7 @@ from data.variants.heroic_fantasy.data import (
     items_dict,
     aptitudes,
     find_mastery_lvl,  # noqa: F401
+    gen_classes,  # noqa: F401
 )
 
 
