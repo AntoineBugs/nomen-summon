@@ -22,7 +22,7 @@ class SpeciesProfile:
         fam = compute_name(familyN)
 
         # computing the species index
-        num = (fir + fam) % 26
+        num = (fir + fam) % len(species.keys())
         spec = species[num]
 
         # species name
