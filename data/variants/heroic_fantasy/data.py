@@ -1,6 +1,8 @@
 import sys
 import os
 
+CURDIR = "heroic_fantasy"
+
 # Species
 species_list = [
     "loup-garou",
@@ -31,7 +33,7 @@ species_list = [
     "minotaure",
 ]
 
-filename = os.path.abspath("species.txt")
+filename = os.path.abspath(os.path.join("data", "variants", CURDIR, "species.txt"))
 with open(filename, "rt", encoding="utf8") as file:
     species_desc = file.readlines()
     for i, line in enumerate(species_desc):
@@ -113,9 +115,7 @@ class_names = [
     "voleur",
 ]
 
-filename = os.path.abspath(
-    os.path.join("data", "variants", "urban_fantasy", "classes.txt")
-)
+filename = os.path.abspath(os.path.join("data", "variants", CURDIR, "classes.txt"))
 with open(filename, "rt", encoding="utf8") as file:
     class_desc = file.readlines()
     for i, line in enumerate(class_desc):
@@ -150,7 +150,7 @@ power_names = [
     "onironaute",
 ]
 
-filename = os.path.abspath("powers.txt")
+filename = os.path.abspath(os.path.join("data", "variants", CURDIR, "powers.txt"))
 with open(filename, "rt", encoding="utf8") as file:
     power_desc = file.readlines()
     for i, line in enumerate(power_desc):
