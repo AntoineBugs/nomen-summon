@@ -266,7 +266,7 @@ def shift_names(prenom, nom, ref, birth):
     act_prenom, act_nom = prenom, nom
     norm_prenom, norm_nom = str_norm(prenom), str_norm(nom)
     string = f"{norm_prenom} {norm_nom}"
-    chl = chs.change_letters(shift, 0, 1, vow, string).split()
+    chl = chs.change_letters(shift, 0, 1, vowels, string).split()
     size_prenom = 1
     while sum(len(s) for s in chl[:size_prenom]) < len(norm_prenom):
         size_prenom += 1
