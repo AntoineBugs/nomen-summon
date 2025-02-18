@@ -3,6 +3,18 @@ from datetime import datetime, date
 
 
 def date_diff(ref: date, y: int, m: int, d: int):
+    """
+    Calculate the difference in days between a reference date and a given date.
+
+    Args:
+        ref (date): The reference date.
+        y (int): Year of the given date.
+        m (int): Month of the given date.
+        d (int): Day of the given date.
+
+    Returns:
+        int: The difference in days.
+    """
     dt = datetime(y, m, d)
     diff = dt.date() - ref
     return diff.days
@@ -13,6 +25,17 @@ def shift_float(f, ref: date):
 
 
 def cos_shift(ref: date):
+    """
+    Applies a cosine shift transformation to a given reference date.
+    This function creates a cosine-based transformation function and applies
+    it to the provided reference date using the `shift_float` function.
+    Args:
+        ref (date): The reference date to which the cosine shift transformation
+                    will be applied.
+    Returns:
+        function: A function that takes a single argument `x` and returns the
+                  transformed value using the cosine shift formula.
+    """
     def f(x):
         return (cos(x) + 1) / 2
 
@@ -20,11 +43,35 @@ def cos_shift(ref: date):
 
 
 def interval_conversion(x, f_min, f_max, i_min, i_max):
+    """
+    Converts a value from one interval to another.
+
+    Parameters:
+    x (float): The value to be converted.
+    f_min (float): The minimum value of the original interval.
+    f_max (float): The maximum value of the original interval.
+    i_min (float): The minimum value of the target interval.
+    i_max (float): The maximum value of the target interval.
+
+    Returns:
+    float: The value converted to the target interval.
+    """
     x_frac = (x - f_min) / (f_max - f_min)
     return x_frac * (i_max - i_min) + i_min
 
 
 def cos_to_interval(x, i_min, i_max):
+    """
+    Converts a cosine value to a specified interval.
+
+    Args:
+        x (float): The cosine value to be converted, expected to be in the range [0, 1].
+        i_min (float): The minimum value of the target interval.
+        i_max (float): The maximum value of the target interval.
+
+    Returns:
+        float: The value converted to the specified interval [i_min, i_max].
+    """
     return interval_conversion(x, 0, 1, i_min, i_max)
 
 
@@ -43,6 +90,17 @@ def cos_to_interval(x, i_min, i_max):
 
 
 def change_letters(shift: float, fmin, fmax, vowels: str, string: str):
+    """
+    Change the letters in the input string based on a shift value and a range.
+    Args:
+        shift (float): The shift value used to determine the seed for letter changes.
+        fmin: The minimum value of the range for the shift.
+        fmax: The maximum value of the range for the shift.
+        vowels (str): A string containing all the vowels to be considered.
+        string (str): The input string whose letters are to be changed.
+    Returns:
+        str: The modified string with letters changed based on the shift value.
+    """
     def get_consonants(vowels):
         alpha = [chr(ord("a") + i) for i in range(26)]
         for v in vowels:
@@ -61,6 +119,20 @@ def change_letters(shift: float, fmin, fmax, vowels: str, string: str):
 
 
 def change_words(vowels, consonants, size, lens, chars, seed):
+    """
+    Transforms a list of characters into new words based on a seed value and specified rules.
+
+    Args:
+        vowels (list): A list of vowel characters.
+        consonants (list): A list of consonant characters.
+        size (int): The size parameter used for modulus operations.
+        lens (list): A list of integers representing the lengths of the new words.
+        chars (list): A list of characters to be transformed.
+        seed (int): A seed value used to determine the transformation.
+
+    Returns:
+        list: A list of new words formed by transforming the input characters.
+    """
     new_words = [[]]
     cur_w = 0
     past_w = 0
@@ -82,6 +154,20 @@ def change_words(vowels, consonants, size, lens, chars, seed):
 
 
 def shift_char(char: str, letter_shift: int, among: str):
+    """
+    Shifts a character by a specified number of positions within a given string.
+
+    Args:
+        char (str): The character to be shifted.
+        letter_shift (int): The number of positions to shift the character.
+        among (str): The string within which the character is shifted.
+
+    Returns:
+        str: The character after being shifted within the given string.
+
+    Raises:
+        ValueError: If the character is not found in the given string.
+    """
     ind = among.index(char)
     ind = (ind + letter_shift) % len(among)
     return among[ind]

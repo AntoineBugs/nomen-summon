@@ -11,20 +11,29 @@ from data.variants.heroic_fantasy.data import (
 
 
 #   Pickle dumping functions
-# You can use this script and its content to generate the pickle files again
-# The pickle files can be used to maintain a default version of the data
+# Use this script to regenerate pickle files
+# Pickle files maintain default data versions
 
 
 def species_dump():
-    with open("species.pickle", "wb") as species_file:
-        pickle.dump(species_dict, species_file)
+    try:
+        with open("species.pickle", "wb") as species_file:
+            pickle.dump(species_dict, species_file)
+    except IOError as e:
+        print(f"An error occurred while writing to species.pickle: {e}")
 
 
 def items_dump():
-    with open("items.pickle", "wb") as items_file:
-        pickle.dump(items_dict, items_file)
+    try:
+        with open("items.pickle", "wb") as items_file:
+            pickle.dump(items_dict, items_file)
+    except IOError as e:
+        print(f"An error occurred while writing to items.pickle: {e}")
 
 
 def apts_dump():
-    with open("apts.pickle", "wb") as aptitudes_file:
-        pickle.dump(aptitudes, aptitudes_file)
+    try:
+        with open("apts.pickle", "wb") as aptitudes_file:
+            pickle.dump(aptitudes, aptitudes_file)
+    except IOError as e:
+        print(f"An error occurred while writing to apts.pickle: {e}")

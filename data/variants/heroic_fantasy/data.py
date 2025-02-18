@@ -31,7 +31,7 @@ species_list = [
     "minotaure",
 ]
 
-filename = os.path.abspath("species.txt")
+filename = os.path.join(os.path.dirname(__file__), "species.txt")
 with open(filename, "rt", encoding="utf8") as file:
     species_desc = file.readlines()
     for i, line in enumerate(species_desc):
@@ -113,9 +113,7 @@ class_names = [
     "voleur",
 ]
 
-filename = os.path.abspath(
-    os.path.join("data", "variants", "urban_fantasy", "classes.txt")
-)
+filename = os.path.join(os.path.dirname(__file__), "classes.txt")
 with open(filename, "rt", encoding="utf8") as file:
     class_desc = file.readlines()
     for i, line in enumerate(class_desc):
@@ -150,7 +148,7 @@ power_names = [
     "onironaute",
 ]
 
-filename = os.path.abspath("powers.txt")
+filename = os.path.join(os.path.dirname(__file__), "powers.txt")
 with open(filename, "rt", encoding="utf8") as file:
     power_desc = file.readlines()
     for i, line in enumerate(power_desc):
@@ -164,20 +162,30 @@ power_dict = {l: {"name": n, "desc": d} for (l, n, d) in power_zip}  # noqa: E74
 aptitudes = {"classes": class_dict, "powers": power_dict}
 
 # Mastery levels
-apt_mastery = {
-    "base": range(50),
-    "avancé": range(50, 100),
-    "maître": range(100, 200),
-    "élite": range(200, sys.maxsize),
-}
+import bisect
+
+apt_mastery = [
+    (0, 50, "base"),
+    (50, 100, "avancé"),
+    (100, 200, "maître"),
+    (200, sys.maxsize, "élite"),
+]
 
 
 def find_mastery_lvl(lvl):
+    """
+    Determines the mastery level based on the given level.
+
+    Args:
+        lvl (int): The level to find the corresponding mastery for.
+
+    Returns:
+        str: The mastery level corresponding to the given level. Returns an empty string if no mastery level is found.
+    """
     mastery = ""
-    for k, v in apt_mastery.items():
-        if lvl in v:
-            mastery = k
-            break
+    idx = bisect.bisect_right([x[0] for x in apt_mastery], lvl)
+    if idx > 0:
+        mastery = apt_mastery[idx - 1][2]
     return mastery
 
 

@@ -10,8 +10,8 @@ Most of the written details used for the character descriptions (classes, specie
 
 ---
 
-## Dependencies
-Apart from the standard Python 3 library, this package works with the following set of dependencies (the versions are as I have them installed on my computer as of my last tests on the program):
+## Requirements
+Apart from the standard Python 3 library, this package works with the following set of requirements (the versions are as I have them installed on my computer as of my last tests on the program):
 - scipy (1.4.1)
 - Unidecode (1.1.1)
 
