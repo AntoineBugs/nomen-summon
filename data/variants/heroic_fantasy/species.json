@@ -1,0 +1,106 @@
+{
+    "0": [
+        "loup-garou",
+        "Les loups-garous adoptent en général une apparence humaine, mais peuvent se transformer (notamment lors des nuits de pleine lune) en énormes loups."
+    ],
+    "1": [
+        "ange",
+        "Les anges ne diffèrent des humains que par une paire d'ailes de plus ou moins grande envergure dans leur dos, leur permettant de voler."
+    ],
+    "2": [
+        "orc",
+        "Les orcs sont de grands êtres humanoïdes à la peau verte ou grise, aux oreilles pointues et aux yeux sombres."
+    ],
+    "3": [
+        "harpie",
+        "Les harpies sont de véritables hybrides entre des humains et des oiseaux, ayant des ailes à la place des bras et des pattes munies de serres pour jambes."
+    ],
+    "4": [
+        "dragonide",
+        "Les dragonides peuvent alterner entre une forme de dragon et une forme humaine pouvant conserver certain des traits de l'autre forme (queue, écailles, cornes ...)."
+    ],
+    "5": [
+        "gobelin",
+        "Les gobelins sont de petits êtres humanoïdes à la peau verte ou grise, aux oreilles pointues et aux yeux sombres."
+    ],
+    "6": [
+        "nain",
+        "Les nains ressemblent à des humains, mais ont un corps généralement plus petit et trapu, et une force physique supérieure."
+    ],
+    "7": [
+        "faune",
+        "Les faunes ont une apparence majoritairement humaine, mais aussi des cornes et des pattes de bouc ou chèvre en guise de jambes."
+    ],
+    "8": [
+        "elfe",
+        "Les elfes se distinguent des humains par des oreilles pointues, une taille moyenne plus importante et une grande longévité."
+    ],
+    "9": [
+        "félice",
+        "Les félices ont des traits plutôt proches du chat, mais une apparence humanoïde."
+    ],
+    "10": [
+        "vampire",
+        "Les vampires ont une peau pâle et très sensible à la lumière, des canines surdéveloppées et une grande longévité."
+    ],
+    "11": [
+        "reptilien",
+        "Les reptiliens ont des traits plutôt proches du lézard, mais une apparence humanoïde."
+    ],
+    "12": [
+        "géant",
+        "Les géants ont une apparence humaine, mais une taille beaucoup plus importante."
+    ],
+    "13": [
+        "humain",
+        "Les humains sont ... humanoïdes."
+    ],
+    "14": [
+        "démon",
+        "Les démons ont une apparence humaine, couplée à des cornes de diverses formes et une queue."
+    ],
+    "15": [
+        "naga",
+        "Les nagas ont un buste humain sur un corps de serpent."
+    ],
+    "16": [
+        "fée",
+        "Les fées sont semblables aux humains, à quelques différences près : une plus petite taille, des ailes d'insectes et des oreilles en pointe."
+    ],
+    "17": [
+        "féloure",
+        "Les féloures ont des traits plutôt proches du panda géant, mais une apparence humanoïde."
+    ],
+    "18": [
+        "selkie",
+        "Les selkies sont des humains capables de se transformer en phoques grâce à une seconde peau."
+    ],
+    "19": [
+        "gnome",
+        "Les gnomes ont une apparence humanoïde, mais une très petite taille et des oreilles en pointe."
+    ],
+    "20": [
+        "centaure",
+        "Les centaures ont un buste humain sur un corps de cheval."
+    ],
+    "21": [
+        "troll",
+        "Les trolls sont de très grandes créatures humanoïdes à la peau grise et dure comme la pierre."
+    ],
+    "22": [
+        "kelpie",
+        "Les kelpies vivent dans des lacs et peuvent alterner entre une forme humaine et une forme de cheval."
+    ],
+    "23": [
+        "sirène",
+        "Les sirènes ont un buste humain sur un corps de poisson."
+    ],
+    "24": [
+        "golem",
+        "Les golems sont des statues - généralement d'argile - qui ont pris vie."
+    ],
+    "25": [
+        "minotaure",
+        "Les minotaures ont les traits d'une vache ou d'un taureau, mais une apparence humanoïde."
+    ]
+}

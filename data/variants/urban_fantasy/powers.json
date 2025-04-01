@@ -1,0 +1,86 @@
+{
+    "an": {
+        "name": "shifter",
+        "desc": "Les shifters sont capables de partager leur conscience avec leurs équivalents interdimensionnels."
+    },
+    "en": {
+        "name": "empathe",
+        "desc": "Les empathes peuvent ressentir les émotions des personnes autour d'eux."
+    },
+    "in": {
+        "name": "éveillé",
+        "desc": "Les éveillés ont un lien fort avec la nature, à tous les niveaux."
+    },
+    "on": {
+        "name": "tulpamancien·ne",
+        "desc": "Les tulpamancien·nes sont capables d'invoquer des créatures issues de leur imagination."
+    },
+    "un": {
+        "name": "chad",
+        "desc": "Les chads possèdent des attributs physiques idéaux, et un charisme exceptionnel."
+    },
+    "yn": {
+        "name": "quantique",
+        "desc": "Les quantiques sont capables de contrôler leur énergie quantique."
+    },
+    "aen": {
+        "name": "onironaute",
+        "desc": "Les onironautes peuvent se déplacer entre les rêves des autres."
+    },
+    "ain": {
+        "name": "clairvoyant·e",
+        "desc": "Les clairvoyant·es distinguent les différentes voies du destin."
+    },
+    "aon": {
+        "name": "invocateur·rice",
+        "desc": "Les invocateur·rices peuvent convoquer des entités extra-dimensionnelles."
+    },
+    "aun": {
+        "name": "protagoniste",
+        "desc": "Les protagonistes sont au centre de leur réalité."
+    },
+    "ayn": {
+        "name": "superposé·e",
+        "desc": "Les superposé·es peuvent alterner entre différents états d'existence."
+    },
+    "ein": {
+        "name": "guérisseur·se",
+        "desc": "Les guérisseur·ses ont la capacité de réparer les tissus vivants."
+    },
+    "eon": {
+        "name": "hypnotiseur·se",
+        "desc": "Les hypnotiseur·ses peuvent altérer le niveau de conscience des autres."
+    },
+    "eun": {
+        "name": "leader",
+        "desc": "Les leaders ont une aura suffisamment charismatique pour se faire obéir sans question."
+    },
+    "eyn": {
+        "name": "auramancien·ne",
+        "desc": "Les auramancien·nes peuvent lire l'aura des autres.  "
+    },
+    "ion": {
+        "name": "main verte",
+        "desc": "Les mains vertes disposent du talent de faire grandir les plantes à grande vitesse."
+    },
+    "iun": {
+        "name": "dolittle",
+        "desc": "Les dolittles peuvent communiquer avec toutes les espèces vivantes."
+    },
+    "iyn": {
+        "name": "radiesthésiste",
+        "desc": "Les radiesthésistes peuvent percevoir les courants d'énergie ambiants."
+    },
+    "oun": {
+        "name": "gourou",
+        "desc": "Les gourous sont capables d'invoquer des sbires à leur ordres."
+    },
+    "oyn": {
+        "name": "médium",
+        "desc": "Les médiums peuvent communiquer et révéler les esprits."
+    },
+    "uyn": {
+        "name": "oméga",
+        "desc": "Les omégas sont des êtres parfaits transcendant les règles naturelles. "
+    }
+}

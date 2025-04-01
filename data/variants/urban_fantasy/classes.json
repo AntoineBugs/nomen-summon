@@ -1,0 +1,86 @@
+{
+    "a": {
+        "name": "fanboy·girl",
+        "desc": "Les fangirls et fanboys tirent leurs aptitudes de leur dévouement à une oeuvre quelconque."
+    },
+    "e": {
+        "name": "geek",
+        "desc": "Le terme \"geek\" désigne tous ceux dont les capacités sont directement liées au virtuel et au numérique."
+    },
+    "i": {
+        "name": "nerd",
+        "desc": "Le savoir est une arme, celle des nerds, qui utilisent leur domaine de connaissance favori à leur avantage."
+    },
+    "o": {
+        "name": "artiste",
+        "desc": "Classe hautement appréciée, les artistes utilisent de multiples médiums pour exprimer leurs émotions."
+    },
+    "u": {
+        "name": "militant",
+        "desc": "Les attributs des militants sont aussi divers que les représentants de cette classe, qui ont en commun le besoin de transmettre un message fort."
+    },
+    "y": {
+        "name": "mystique",
+        "desc": "Il vaut mieux se méfier des mystiques, dont les talents inexpliqués sont méconnus du grand public ..."
+    },
+    "ae": {
+        "name": "gamer",
+        "desc": "Alliant leur goût de la technologie à leur passion des univers fictifs, les gamers sont une classe compétitive de nature."
+    },
+    "ai": {
+        "name": "critique",
+        "desc": "Les critiques sont au-delà des simples fans, et on fait de leur objet de culte, une cible de leur curiosité dévorante."
+    },
+    "ao": {
+        "name": "fan-artiste",
+        "desc": "Les fan-artistes ont choisi comme sujet de leurs oeuvres, les oeuvres d'autres artistes plus connus."
+    },
+    "au": {
+        "name": "cosplayer",
+        "desc": "Les cosplayers ont la capacité d'incarner leurs personnages préférés au travers de costumes élaborés."
+    },
+    "ay": {
+        "name": "rôliste",
+        "desc": "N'est pas rôliste qui veut ; cette classe implique une capacité de dévouement au personnage inaltérable."
+    },
+    "ei": {
+        "name": "programmeur·se",
+        "desc": "La programmation est la variation numérique des nerds, qui leur permet de concevoir les programmes les plus fous. "
+    },
+    "eo": {
+        "name": "créateur·ice de contenu",
+        "desc": "La création de contenu regroupe de nombreux aspects, mais touche d'une manière générale aux réseaux sociaux."
+    },
+    "eu": {
+        "name": "hacker",
+        "desc": "Les hackers sont des geeks lassés par les dérives de la société dans cette ère numérique."
+    },
+    "ey": {
+        "name": "transhumaniste",
+        "desc": "Les transhumanistes n'hésitent pas à modifier leur propre corps avec la technologie contemporaine, pour augmenter leurs capacités naturelles."
+    },
+    "io": {
+        "name": "vulgarisateur·ice",
+        "desc": "La mission des vulgarisateurs est de transmettre leur connaissance de manière créative."
+    },
+    "iu": {
+        "name": "bricoleur",
+        "desc": "Les bricoleurs utilisent leur sens de la débrouille pour concevoir les objets qui leur plaisent."
+    },
+    "iy": {
+        "name": "devin",
+        "desc": "Il existe de nombreux types de devins, qui prétendent tous pouvoir scruter les fils du destin ..."
+    },
+    "ou": {
+        "name": "tatoueur·se",
+        "desc": "Les tatoueuses et tatoueurs injectent leur créativité dans la peau de leurs victimes volontaires."
+    },
+    "oy": {
+        "name": "enchanteur·resse",
+        "desc": "Le principal atout des enchanteurs est leur aptitude à charger leurs créations d'une intention magique."
+    },
+    "uy": {
+        "name": "sorcier·ère",
+        "desc": "Les sorcières et sorciers utilisent leurs pouvoirs pour remuer la société."
+    }
+}

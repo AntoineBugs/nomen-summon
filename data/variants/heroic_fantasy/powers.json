@@ -1,0 +1,86 @@
+{
+    "an": {
+        "name": "arcaniste",
+        "desc": "Les arcanistes ont un lien inné avec la magie, et sont capables de l'utiliser presque sans limites, si ce n'est celles de leur propre santé physique et mentale ..."
+    },
+    "en": {
+        "name": "élémentaliste",
+        "desc": "Les élémentalistes possèdent le talent de contrôler un ou plusieurs éléments naturels, qu'ils soient des matériaux (pierre, eau, bois, glace, sable ...) ou des énergies (feu, foudre)."
+    },
+    "in": {
+        "name": "chaman",
+        "desc": "Les chamans sont capables de communiquer avec des entités vivant sur d'autres plans que le nôtre : divinités, esprits, fantômes ..."
+    },
+    "on": {
+        "name": "métamorphe",
+        "desc": "Les métamorphes ont la faculté de modifier leur apparence physique, et de prendre la forme d'un autre être de leur espèce, d'une autre espèce ou même parfois d'objets inanimés."
+    },
+    "un": {
+        "name": "téléporteur",
+        "desc": "Les téléporteurs peuvent par la pensée déplacer leur propre corps ou d'autres objets d'un lieu à l'autre ; une connaissance parfaite des lieux ainsi visités leur est nécessaire dans de nombreux cas."
+    },
+    "yn": {
+        "name": "télépathe",
+        "desc": "Les télépathes sont capables d'accéder aux pensées d'autre personnes, pour les lire ou transmettre leurs propres pensées à celles-ci."
+    },
+    "aen": {
+        "name": "évocateur",
+        "desc": "Les évocateurs ont le don de création pure : ils peuvent faire apparaître toute manière ou énergie qu'ils sont capables de conceptualiser."
+    },
+    "ain": {
+        "name": "pactisant",
+        "desc": "Les pactisants peuvent demander l'assistance d'un être supérieur pour obtenir des capacités supplémentaires ou des denrées inestimables."
+    },
+    "aon": {
+        "name": "nécromancien",
+        "desc": "Les nécromanciens détiennent la capacité de réanimer et de commander les morts."
+    },
+    "aun": {
+        "name": "marche-temps",
+        "desc": "Les marche-temps ont un degré de contrôle sur l'écoulement du temps, peuvent se déplacer dans le temps ou encore visualiser les évènements passés et futurs."
+    },
+    "ayn": {
+        "name": "marionnettiste",
+        "desc": "Les marionnettistes sont capables de contrôler les esprits d'autres êtres vivants pour les faire agir à leur guise."
+    },
+    "ein": {
+        "name": "enchanteur",
+        "desc": "Les enchanteurs peuvent lier les esprits à des objets ou des matériaux, pour conférer à ceux-ci de nouvelles capacités ou propriétés"
+    },
+    "eon": {
+        "name": "druide",
+        "desc": "Les druides ont la capacité de se changer en éléments ou en animaux pour se fondre dans la nature."
+    },
+    "eun": {
+        "name": "météomage",
+        "desc": "Les météomages peuvent influencer le climat autour d'eux, déclenchant ainsi divers phénomènes météorologiques à leur gré."
+    },
+    "eyn": {
+        "name": "faiseur de golems",
+        "desc": "Les faiseurs de golems peuvent donner vie à la matière inerte sous la forme de golems, et leur faire exécuter des tâches plus ou moins complexes."
+    },
+    "ion": {
+        "name": "avatar",
+        "desc": "Les avatars sont les réceptacles d'entités divines, et ont ainsi la capacité d'utiliser leurs pouvoirs, en contrepartie d'une coexistence forcée."
+    },
+    "iun": {
+        "name": "invocateur",
+        "desc": "Les invocateurs peuvent faire appel à des êtres surnaturels dans notre monde et les soumettre à leur volonté dans une certaine mesure."
+    },
+    "iyn": {
+        "name": "marabout",
+        "desc": "Les marabouts ont le pouvoir de soumettre d'autres êtres à des puissances surnaturelles, généralement pour les torturer ou les contrôler."
+    },
+    "oun": {
+        "name": "métromage",
+        "desc": "Les métromages peuvent augmenter ou réduire à l'extrême leurs propres dimensions ou celles des objets alentours."
+    },
+    "oyn": {
+        "name": "doppelganger",
+        "desc": "Les doppelgängers peuvent devenir des copies parfaites d'autres personnes, allant jusqu'à répliquer leurs souvenirs et leurs schémas de pensée pour les imiter."
+    },
+    "uyn": {
+        "name": "onironaute",
+        "desc": "Les onironautes sont capables de se déplacer physiquement, ou en tout cas mentalement, dans les rêves d'autres personnes."
+    }
+}

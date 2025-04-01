@@ -1,4 +1,4 @@
-from bin.data_access import find_mastery_lvl, gen_classes
+from data.data import find_mastery_lvl, gen_classes
 
 
 def main_usage():

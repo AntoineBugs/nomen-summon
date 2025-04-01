@@ -1,0 +1,146 @@
+{
+    "simple": {
+        "bmp": [
+            "armure/bouclier",
+            3,
+            "objet"
+        ],
+        "gr": [
+            "altération physique",
+            8,
+            "inclassable"
+        ],
+        "dnt": [
+            "arme/outil",
+            8,
+            "objet"
+        ],
+        "fvw": [
+            "personnalisation",
+            0,
+            "autre"
+        ],
+        "h": [
+            "vêtement/accessoire",
+            1,
+            "objet"
+        ],
+        "cklqx": [
+            "source de pouvoir",
+            10,
+            "inclassable"
+        ],
+        "jsz": [
+            "familier",
+            5,
+            "autre"
+        ]
+    },
+    "composed": {
+        "bmp+gr": [
+            "prothèse défensive",
+            11,
+            "objet"
+        ],
+        "bmp+dnt": [
+            "armure équipée",
+            11,
+            "objet"
+        ],
+        "bmp+fvw": [
+            "armure familiale",
+            3,
+            "objet"
+        ],
+        "bmp+h": [
+            "amulette",
+            4,
+            "objet"
+        ],
+        "bmp+cklqx": [
+            "armure de puissance",
+            13,
+            "objet"
+        ],
+        "bmp+jsz": [
+            "armure vivante",
+            8,
+            "autre"
+        ],
+        "gr+dnt": [
+            "prothèse offensive",
+            16,
+            "objet"
+        ],
+        "gr+fvw": [
+            "membre/organe supplémentaire",
+            8,
+            "autre"
+        ],
+        "gr+h": [
+            "augmentation physique",
+            9,
+            "autre"
+        ],
+        "gr+cklqx": [
+            "relique",
+            18,
+            "autre"
+        ],
+        "gr+jsz": [
+            "symbiote",
+            13,
+            "autre"
+        ],
+        "dnt+fvw": [
+            "arme familiale",
+            8,
+            "objet"
+        ],
+        "dnt+h": [
+            "belle arme",
+            9,
+            "objet"
+        ],
+        "dnt+cklqx": [
+            "arme stimulante",
+            18,
+            "objet"
+        ],
+        "dnt+jsz": [
+            "arme vivante",
+            13,
+            "autre"
+        ],
+        "fvw+h": [
+            "tenue d'apparât",
+            1,
+            "objet"
+        ],
+        "fvw+cklqx": [
+            "entraînement particulier",
+            10,
+            "inclassable"
+        ],
+        "fvw+jsz": [
+            "esprit protecteur",
+            5,
+            "autre"
+        ],
+        "h+cklqx": [
+            "tenue de combat",
+            11,
+            "objet"
+        ],
+        "h+jsz": [
+            "monture",
+            6,
+            "autre"
+        ],
+        "cklqx+jsz": [
+            "gardien de trésor",
+            15,
+            "autre"
+        ]
+    }
+}

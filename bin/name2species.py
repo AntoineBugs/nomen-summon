@@ -1,6 +1,6 @@
 from scipy.special import comb
 
-from bin.data_access import species_dict as species
+from data.data import species_dict as species
 
 from bin.utils import str_norm
 

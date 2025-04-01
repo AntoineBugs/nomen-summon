@@ -3,8 +3,7 @@ from math import floor
 from bin.name2clan import GeneticProfile
 from bin.name2species import SpeciesProfile
 from bin.utils import cut_name, group_cuts, label_cuts
-from bin.data_access import aptitudes as apts
-from bin.data_access import items_dict as items
+from data.data import aptitudes as apts, items_dict as items
 
 
 class Character:
