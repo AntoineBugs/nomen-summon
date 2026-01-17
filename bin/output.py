@@ -18,7 +18,7 @@ def main_usage():
     return s + t
 
 
-def item2str(item):
+def item2str(item, indent=0):
     """
     Convert an item dictionary to a formatted string.
 
@@ -28,7 +28,8 @@ def item2str(item):
     Returns:
         str: A formatted string representing the item.
     """
-    item_str = f"\n\t\t* **{item['name'].capitalize()}**"
+    tabs = "\t" * indent
+    item_str = f"\n{tabs}* **{item['name'].capitalize()}**"
     if item["type"] != "inclassable":
         item_str += f" niveau {item['level']}/100"
     item_str += "\n"
@@ -56,7 +57,7 @@ def skill2str(skill):
         s += "\t* Inventaire :"
         for it in its:
             if not it["all"]:
-                s += item2str(it)
+                s += item2str(it, indent=2)
     return s
 
 
@@ -238,7 +239,7 @@ def print_global_inv(chara):
     if global_inv:
         global_inventory_str = "## Inventaire global :\n"
         for it in global_inv.values():
-            global_inventory_str += "* " + item2str(it)
+            global_inventory_str += item2str(it)
         global_inventory_str += "\n"
     return global_inventory_str
 
