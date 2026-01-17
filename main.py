@@ -60,22 +60,25 @@ def line_exec(args):
     if args[1] == "-f":
         filename = args[2]
         in_file = True
-        if args[3] == "-a":
+        if len(args) > 3 and args[3] == "-a":
             mode = "at"
             start = 4
         else:
             mode = "wt"
             start = 3
-            start = 3
     cpt = 0
+
+    actual_mode = mode
 
     def ops(ch):
         if in_file:
-            write_ops(ch, filename, mode=mode)
+            write_ops(ch, filename, mode=actual_mode)
         else:
             simple_ops(ch)
 
     while start + 1 < len(args):
+        if cpt == 1 and in_file:
+            actual_mode = "at"  # switch to append mode after first write
         firstN = args[start]
         lastN = args[start + 1]
         ch = make_char(firstN, lastN)

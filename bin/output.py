@@ -28,7 +28,7 @@ def item2str(item):
     Returns:
         str: A formatted string representing the item.
     """
-    item_str = f"\n\t· {item['name'].capitalize()}"
+    item_str = f"\n\t\t* **{item['name'].capitalize()}**"
     if item["type"] != "inclassable":
         item_str += f" niveau {item['level']}/100"
     item_str += "\n"
@@ -50,10 +50,10 @@ def skill2str(skill):
     lvl = skill["level"]
     its = skill["items"]
 
-    s = f"· {name.capitalize()} niveau {lvl}/100 ({find_mastery_lvl(lvl)})\n"
-    s += "\t" + desc + "\n"
+    s = f"* **{name.capitalize()}** niveau {lvl}/100 *({find_mastery_lvl(lvl)})*\n"
+    s += "\t> " + desc + "\n"
     if len(its) > 0:
-        s += "\tInventaire :"
+        s += "\t* Inventaire :"
         for it in its:
             if not it["all"]:
                 s += item2str(it)
@@ -82,8 +82,8 @@ def print_char(chara, show=True):
     sp_n = sp.species
     # sp_d = sp.desc  #
 
-    header = f"*** {fir} {fam}{sopt} - {sp_n.capitalize()} niveau {lvl} ***\n"
-    body_spec = f"Description de l'espèce :\n\t{sp.desc}"
+    header = f"# {fir} {fam}{sopt} - {sp_n.capitalize()} niveau {lvl}\n"
+    body_spec = f"## Description de l'espèce :\n{sp.desc}"
 
     body_clan = print_clan(chara)
     body_skills = print_skills(chara)
@@ -107,8 +107,8 @@ def print_clan(chara):
     advantages_list, adv, cl_n, cl_p = get_clan_data(chara)
     description = base_clan_desc(advantages_list, adv)
 
-    description.append(f"\tNoblesse de lignée : {cl_n} / {percent(cl_n) * 100:.0f}%")
-    description.append(f"\tPureté de lignée : {cl_p} / {percent(cl_p) * 100:.0f}%")
+    description.append(f"* Noblesse de lignée : {cl_n} / {percent(cl_n) * 100:.0f}%")
+    description.append(f"* Pureté de lignée : {cl_p} / {percent(cl_p) * 100:.0f}%")
     description.append("")
     body_clan = "\n".join(description)
     return body_clan
@@ -131,7 +131,7 @@ def actual_name(chara):
     """
     sopt = ""
     if chara.act_firstN and chara.act_lastN:
-        sopt = f" ({chara.act_firstN} {chara.act_lastN})"
+        sopt = f" *({chara.act_firstN} {chara.act_lastN})*"
     elif chara.act_firstN or chara.act_lastN:
         raise TypeError("Missing argument actual_firstN or actual_lastN")
     return sopt
@@ -213,7 +213,7 @@ def print_skills(chara):
     Returns:
         str: A formatted string listing the character's skills.
     """
-    body_skills = "Aptitudes et pouvoirs :\n"
+    body_skills = "## Aptitudes et pouvoirs :\n"
     for a in chara.skills:
         body_skills += skill2str(a) + "\n"
     return body_skills
@@ -236,9 +236,9 @@ def print_global_inv(chara):
     global_inventory_str = ""
     global_inv = chara.global_inv
     if global_inv:
-        global_inventory_str = "Inventaire global :\n"
+        global_inventory_str = "## Inventaire global :\n"
         for it in global_inv.values():
-            global_inventory_str += item2str(it)
+            global_inventory_str += "* " + item2str(it)
         global_inventory_str += "\n"
     return global_inventory_str
 
@@ -255,9 +255,9 @@ def base_clan_desc(advantages_list, adv):
         list: A list containing the description of the clan.
     """
     description = []
-    description.append("Détails du clan :")
-    genetic_advantages = ", ".join(adv)
-    s = "\tAvantages génétiques "
+    description.append("## Détails du clan :")
+    genetic_advantages = ", ".join([f'**{ga}**' for ga in adv])
+    s = "* Avantages génétiques "
     s += ": " if len(advantages_list) <= 0 else "pour "
     s += genetic_advantages + "."
     description.append(s)
